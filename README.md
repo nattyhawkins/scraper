@@ -1,2 +1,8 @@
-# scraper
-Web scraper using Python
+# Web Scraper
+
+## Technologies
+- Python
+- Beautiful Soup
+- Selenium
+- Unit testing
+
