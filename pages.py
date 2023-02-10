@@ -24,14 +24,16 @@ class MainPage(BasePage):
     current_track_element = CurrentTrackElement()
 
     def is_title_matches(self):
-        """Verifies page title"""
+        """Verifies correct site is loaded"""
         return "Poolsuite" in self.driver.title
     
     def press_space(self):
         """space to skip welcome animation"""
         ActionChains(self.driver).key_down(Keys.SPACE).key_up(Keys.SPACE).perform()
-
-
+    
+    def record_track(self):
+        # access element setter by saving to a new variable
+        track_name = self.current_track_element
 
 # track = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".current-track>h3>a")))
 # elem = driver.find_element(By.CSS_SELECTOR, ".current-track>h3>a")
