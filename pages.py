@@ -1,16 +1,9 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from element import BasePageElement
 from locators import *
-
-# ! Elements
-class CurrentTrackElement(BasePageElement):
-    """create ele ment class by inheriting generic functionality from base"""
-    locator = MainPageLocators.CURRENT_TRACK
 
 
 # ! Pages
@@ -21,7 +14,7 @@ class BasePage(object):
 
 class MainPage(BasePage):
     
-    current_track_element = CurrentTrackElement()
+    # current_track_element = CurrentTrackElement()
 
     def is_title_matches(self):
         """Verifies correct site is loaded"""
@@ -30,6 +23,13 @@ class MainPage(BasePage):
     def press_space(self):
         """space to skip welcome animation"""
         ActionChains(self.driver).key_down(Keys.SPACE).key_up(Keys.SPACE).perform()
+    
+    def click_channels(self):
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.CHANNEL_BTN)) #wait for music box
+        button = self.driver.find_element(*MainPageLocators.CHANNEL_BTN)
+        print('clicking channels')
+        # button.click()
+        self.driver.execute_script("arguments[0].click();", button)
     
     def record_track(self):
         # access element setter by saving to a new variable
