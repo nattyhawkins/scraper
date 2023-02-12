@@ -2,7 +2,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from element import BasePageElement
+from element import *
 from locators import *
 
 
@@ -31,25 +31,31 @@ class MainPage(BasePage):
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".outer"))) #wait for loading animation
         self.mainPage.press_space()
 
-    def click_channels(self):
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.CHANNEL_BTN)) #wait for music box
-        button = self.driver.find_element(*MainPageLocators.CHANNEL_BTN)
-        print('clicking channels')
-        # button.click()
-        self.driver.execute_script("arguments[0].click();", button)
+    # def click_channels(self):
+    #     WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.CHANNEL_BTN)) #wait for music box
+    #     button = self.driver.find_element(*MainPageLocators.CHANNEL_BTN)
+    #     print('clicking channels')
+    #     self.driver.execute_script("arguments[0].click();", button)
 
     def get_channels(self):
-        print('getting channels')
-        self.channels = self.driver.find_elements(*MainPageLocators.ALL_CHANNELS)
+        print('getting channels page')
+        channel_elements = ChannelElements(self.driver)
+        # ? ordinary assignment is not triggering getter. Temporarily forcing ->
+        # ? channels = channel_elements
+        channels = channel_elements.__get__(channel_elements)
+        # channels = self.driver.find_elements(*MainPageLocators.ALL_CHANNELS)
         print('\nChannels:')
-        for (i, channel) in enumerate(self.channels):
+        for (i, channel) in enumerate(channels):
             print(f'{i}. {channel.text}')
+            self.channels[i] = channel.text
+        
       
     def select_channel(self, channel={lambda _current_channel: _current_channel + 1 % 7}):
         print('selecting channel')
         if (channel < 4):
-          # click channel
-          print('DO')
+          # channel_element = self.driver.find_elements(By.XPATH,"//li[text()='{self.channels[channel]}']")
+          channel_element = SelectedChannelElement()
+          channel_element.click()
         else:
           # click scroll then channel
           print('DO')

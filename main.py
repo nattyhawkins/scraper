@@ -21,7 +21,7 @@ class PoolsuiteTracker():
 
           # Track list related state
           self._current_channel = 0
-          self.channels = []
+          self.channels = {}
 
       # def skip_intro(self):
       #     print('skipping intro')
@@ -31,7 +31,7 @@ class PoolsuiteTracker():
       #     self.mainPage.press_space()
           
       def get_channels(self):
-          print('getting channels')
+          print('getting channels main')
           self.skip_intro(self)
           self.mainPage.click_channels()
           self.channels = self.driver.find_elements(*MainPageLocators.ALL_CHANNELS)

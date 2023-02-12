@@ -11,6 +11,8 @@ from locators import *
 
 class PoolsuiteTesting(unittest.TestCase):
       #  Set up / tear down are rerun for each test function. So each test defined in this class is run separately.
+      # channel_button_element = ChannelButtonElement()
+
       def setUp(self):
           PoolsuiteTracker.__init__(self)
           # self.skip_intro = PoolsuiteTracker.skip_intro
@@ -29,10 +31,10 @@ class PoolsuiteTesting(unittest.TestCase):
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".logo"))) # check main pg fully loaded
       
       def test_get_channels(self):
-          # need to mock dependency of skip intro in this class
           MainPage.skip_intro(self)
-          MainPage.click_channels(self)
-          print('Running test get channels')
+          # MainPage.click_channels(self)
+          channel_btn_element = ChannelButtonElement(self.driver)
+          channel_btn_element.click()
           MainPage.get_channels(self)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_LIST_SCROLL)) # check main pg fully loaded
 
