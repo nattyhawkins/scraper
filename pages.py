@@ -23,13 +23,38 @@ class MainPage(BasePage):
     def press_space(self):
         """space to skip welcome animation"""
         ActionChains(self.driver).key_down(Keys.SPACE).key_up(Keys.SPACE).perform()
-    
+
+    def skip_intro(self):
+        print('skipping intro')
+        # mainPage = pages.MainPage(self.driver)
+        assert self.mainPage.is_title_matches()
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".outer"))) #wait for loading animation
+        self.mainPage.press_space()
+
     def click_channels(self):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.CHANNEL_BTN)) #wait for music box
         button = self.driver.find_element(*MainPageLocators.CHANNEL_BTN)
         print('clicking channels')
         # button.click()
         self.driver.execute_script("arguments[0].click();", button)
+
+    def get_channels(self):
+        print('getting channels')
+        self.channels = self.driver.find_elements(*MainPageLocators.ALL_CHANNELS)
+        print('\nChannels:')
+        for (i, channel) in enumerate(self.channels):
+            print(f'{i}. {channel.text}')
+      
+    def select_channel(self, channel={lambda _current_channel: _current_channel + 1 % 7}):
+        print('selecting channel')
+        if (channel < 4):
+          # click channel
+          print('DO')
+        else:
+          # click scroll then channel
+          print('DO')
+        
+        self._current_channel = channel
     
     def record_track(self):
         # access element setter by saving to a new variable

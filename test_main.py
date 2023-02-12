@@ -6,14 +6,14 @@ from selenium.webdriver.common.by import By
 from main import PoolsuiteTracker
 import unittest
 from unittest.mock import Mock
-import pages
+from pages import *
 from locators import *
 
 class PoolsuiteTesting(unittest.TestCase):
       #  Set up / tear down are rerun for each test function. So each test defined in this class is run separately.
       def setUp(self):
           PoolsuiteTracker.__init__(self)
-          self.skip_intro = PoolsuiteTracker.skip_intro
+          # self.skip_intro = PoolsuiteTracker.skip_intro
           # opts = Options()
           # opts.add_argument('--headless')
           # assert '--headless' in opts.arguments
@@ -25,13 +25,15 @@ class PoolsuiteTesting(unittest.TestCase):
 
       def xtest_skip_intro(self):
           print('Running test skip intro')
-          PoolsuiteTracker.skip_intro(self)
+          MainPage.skip_intro(self)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".logo"))) # check main pg fully loaded
       
       def test_get_channels(self):
           # need to mock dependency of skip intro in this class
+          MainPage.skip_intro(self)
+          MainPage.click_channels(self)
           print('Running test get channels')
-          PoolsuiteTracker.get_channels(self)
+          MainPage.get_channels(self)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_LIST_SCROLL)) # check main pg fully loaded
 
       def tearDown(self):

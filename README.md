@@ -1,7 +1,7 @@
 # Poolsuite Track History
 This project aims to allow the user to stream music, select a channel and skip songs programmatically, whilst keeping a record of the users track history.
 
-Work in progress
+⚒️ Work in progress ⚒️ 
 
 ## Technologies (So far)
 - Python

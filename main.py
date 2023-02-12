@@ -9,9 +9,7 @@ from element import *
 
 """This page details the main program chain of events, leveraging methods defined on other files"""
 
-class PoolsuiteTracker():
-      
-      
+class PoolsuiteTracker():    
 
       def __init__(self):
           opts = Options()
@@ -22,16 +20,15 @@ class PoolsuiteTracker():
           self.mainPage = pages.MainPage(self.driver)
 
           # Track list related state
-          self._current_channel = 1
+          self._current_channel = 0
           self.channels = []
 
-
-      def skip_intro(self):
-          print('skipping intro')
-          # mainPage = pages.MainPage(self.driver)
-          assert self.mainPage.is_title_matches()
-          WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".outer"))) #wait for loading animation
-          self.mainPage.press_space()
+      # def skip_intro(self):
+      #     print('skipping intro')
+      #     # mainPage = pages.MainPage(self.driver)
+      #     assert self.mainPage.is_title_matches()
+      #     WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".outer"))) #wait for loading animation
+      #     self.mainPage.press_space()
           
       def get_channels(self):
           print('getting channels')
@@ -41,6 +38,11 @@ class PoolsuiteTracker():
           print('\nChannels:')
           for (i, channel) in enumerate(self.channels):
               print(f'{i}. {channel.text}')
+      
+      def select_channel(self):
+          print('selecting channel')
+          self.skip_intro(self)
+
 
 
 
