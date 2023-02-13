@@ -19,9 +19,7 @@ class PoolsuiteTracker():
           self.driver.get('https://poolsuite.net/')
           self.mainPage = pages.MainPage(self.driver)
 
-          # Track list related state
-          self._current_channel = 0
-          self.channels = {}
+          
 
       # def skip_intro(self):
       #     print('skipping intro')

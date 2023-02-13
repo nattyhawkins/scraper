@@ -13,7 +13,7 @@ import time
 class PoolsuiteTesting(unittest.TestCase):
       #  Set up / tear down are rerun for each test function. So each test defined in this class is run separately.
       # channel_button_element = ChannelButtonElement()
-      
+      channel_elements = ChannelElements()
 
 
       def setUp(self):
@@ -30,23 +30,21 @@ class PoolsuiteTesting(unittest.TestCase):
 
       def xtest_skip_intro(self):
           print('Running test skip intro')
-          MainPage.skip_intro(self)
+          self.mainPage.skip_intro(self)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".logo"))) # check main pg fully loaded
       
       def xtest_get_channels(self):
-          MainPage.skip_intro(self)
-          # MainPage.click_channels(self)
-          channel_btn_element = ChannelButtonElement(self.driver)
-          channel_btn_element.click()
-          MainPage.get_channels(self)
+          self.mainPage.skip_intro()
+          # self.mainPage.click_channels(self)
+          self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
+          self.mainPage.get_channels()
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_LIST_SCROLL)) # check main pg fully loaded
       
       def test_select_channel(self):
           print('running test: select channel')
-          MainPage.skip_intro(self)
-          channel_btn_element = ChannelButtonElement(self.driver)
-          channel_btn_element.click()
-          MainPage.select_channel(self, 2)
+          self.mainPage.skip_intro()
+          self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
+          self.mainPage.select_channel(2)
           time.sleep(4)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_BTN))
 

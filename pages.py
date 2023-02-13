@@ -14,8 +14,13 @@ class BasePage(object):
           self.driver = driver
 
 class MainPage(BasePage):
-    
+          
+    # Track list related state
+    _current_channel = 0
+    channels = {}
+
     # current_track_element = CurrentTrackElement()
+    channel_elements = ChannelElements()
 
     def is_title_matches(self):
         """Verifies correct site is loaded"""
@@ -28,22 +33,22 @@ class MainPage(BasePage):
     def skip_intro(self):
         print('skipping intro')
         # mainPage = pages.MainPage(self.driver)
-        assert self.mainPage.is_title_matches()
+        assert self.is_title_matches()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".outer"))) #wait for loading animation
-        self.mainPage.press_space()
+        self.press_space()
 
-    def click_channels(self):
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.CHANNEL_BTN)) #wait for music box
-        button = self.driver.find_element(*MainPageLocators.CHANNEL_BTN)
-        print('clicking channels')
+    def click_element(self, locator):
+        print('clicking element')
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
+        button = self.driver.find_element(*locator)
         self.driver.execute_script("arguments[0].click();", button)
 
     def get_channels(self):
         print('getting channels - page')
-        channel_elements = ChannelElements(self.driver)
+        # channel_elements = ChannelElements()
         # ? ordinary assignment is not triggering getter. Temporarily forcing ->
-        # channels = channel_elements
-        channels = channel_elements.__get__(channel_elements)
+        channels = self.channel_elements
+        # channels = self.channel_elements.element
         print('\nChannels:')
         for (i, channel) in enumerate(channels):
             print(f'{i}. {channel.text}')
@@ -51,15 +56,14 @@ class MainPage(BasePage):
       
     def select_channel(self, channel={lambda _current_channel: _current_channel + 1 % 7}):
         print('selecting channel')
-        channel_locator = (By.CSS_SELECTOR, ".select-options-scroll li:nth-of-type({channel})")
-        channel_element = SelectedChannelElement(channel_locator)
+        locator = (By.CSS_SELECTOR, f".select-options-scroll li:nth-of-type({channel})")
+        channel_element = SelectedChannelElement(locator)
         if (channel > 4):
             print('attempt scroll down')
             self.driver.executeScript("arguments[0].scrollIntoView(true);", channel_element)
-        channel_element.click()
-        
-        
+        self.click_element(locator)
         self._current_channel = channel
+        
     
     def record_track(self):
         # access element setter by saving to a new variable
