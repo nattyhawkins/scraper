@@ -17,7 +17,7 @@ class MainPage(BasePage):
           
     # Track list related state
     _current_channel = 0
-    channels = {}
+    channels = { 0: 'default' }
 
     # current_track_element = CurrentTrackElement()
     channel_elements = ChannelElements()
@@ -45,25 +45,24 @@ class MainPage(BasePage):
 
     def get_channels(self):
         print('getting channels - page')
-        # channel_elements = ChannelElements()
-        # ? ordinary assignment is not triggering getter. Temporarily forcing ->
         channels = self.channel_elements
-        # channels = self.channel_elements.element
         print('\nChannels:')
         for (i, channel) in enumerate(channels):
             print(f'{i}. {channel.text}')
             self.channels[i] = channel.text
       
     def select_channel(self, channel={lambda _current_channel: _current_channel + 1 % 7}):
-        print('selecting channel')
-        locator = (By.CSS_SELECTOR, f".select-options-scroll li:nth-of-type({channel})")
-        channel_element = SelectedChannelElement(locator)
-        if (channel > 4):
-            print('attempt scroll down')
-            self.driver.executeScript("arguments[0].scrollIntoView(true);", channel_element)
+        print(f'selecting channel {channel}')
+        locator = (By.CSS_SELECTOR, f".select-options-scroll li:nth-of-type({channel + 1})")
+        if (channel > 3):
+            print('scroll down')
+            ActionChains(self.driver).move_to_element(self.driver.find_element(*locator)).perform()
         self.click_element(locator)
         self._current_channel = channel
-        
+        print(self.channels[self._current_channel]
+)
+    
+    
     
     def record_track(self):
         # access element setter by saving to a new variable

@@ -44,8 +44,11 @@ class PoolsuiteTesting(unittest.TestCase):
           print('running test: select channel')
           self.mainPage.skip_intro()
           self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
-          self.mainPage.select_channel(2)
-          time.sleep(4)
+          self.mainPage.get_channels()
+          for x in range(3,7):
+            self.mainPage.select_channel(x)
+            self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
+            time.sleep(2)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_BTN))
 
       def tearDown(self):
