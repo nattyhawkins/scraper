@@ -9,7 +9,7 @@ class BasePageElement(object):
     """Base page class that is initialized on every page object class."""
     def __init__(self, driver):
           self.driver = driver
-
+          
     def __set__(self, obj, value):
         """Sets the text to the value supplied, obj is the parent class where element instance is called i.e. MainPage"""
         print('__set__ element')
@@ -47,7 +47,8 @@ class ChannelButtonElement(BasePageElement):
 
 class ChannelElements(BasePageElement):
       locator = MainPageLocators.ALL_CHANNELS
-
+        
 class SelectedChannelElement(BasePageElement):
+      """locator must be passed depending on which channel is selected"""
       def __init__(self, locator):
         self.locator = locator

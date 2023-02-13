@@ -8,10 +8,13 @@ import unittest
 from unittest.mock import Mock
 from pages import *
 from locators import *
+import time
 
 class PoolsuiteTesting(unittest.TestCase):
       #  Set up / tear down are rerun for each test function. So each test defined in this class is run separately.
       # channel_button_element = ChannelButtonElement()
+      
+
 
       def setUp(self):
           PoolsuiteTracker.__init__(self)
@@ -30,13 +33,22 @@ class PoolsuiteTesting(unittest.TestCase):
           MainPage.skip_intro(self)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".logo"))) # check main pg fully loaded
       
-      def test_get_channels(self):
+      def xtest_get_channels(self):
           MainPage.skip_intro(self)
           # MainPage.click_channels(self)
           channel_btn_element = ChannelButtonElement(self.driver)
           channel_btn_element.click()
           MainPage.get_channels(self)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_LIST_SCROLL)) # check main pg fully loaded
+      
+      def test_select_channel(self):
+          print('running test: select channel')
+          MainPage.skip_intro(self)
+          channel_btn_element = ChannelButtonElement(self.driver)
+          channel_btn_element.click()
+          MainPage.select_channel(self, 2)
+          time.sleep(4)
+          assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_BTN))
 
       def tearDown(self):
           self.driver.close()

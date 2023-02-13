@@ -8,6 +8,7 @@ class MainPageLocators(object):
     CHANNEL_BTN = (By.CLASS_NAME,"select-wrapper")
     CHANNEL_LIST_SCROLL = (By.CLASS_NAME,"select-options-scroll")
     ALL_CHANNELS = (By.CSS_SELECTOR, ".select-options-scroll li")
+    
 
     # ! Track
     CURRENT_TRACK = (By.CSS_SELECTOR, ".current-track>h3>a")
