@@ -5,7 +5,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webelement import WebElement
 from element import *
 from locators import *
-
+from track_record import TrackRecord
+from time import ctime
 
 # ! Pages
 class BasePage(object):
@@ -19,8 +20,12 @@ class MainPage(BasePage):
     _current_channel = 0
     channels = { 0: 'default' }
 
-    # current_track_element = CurrentTrackElement()
+    # Elements
+    current_track_element = CurrentTrackElement()
+    current_artist_element = CurrentArtistElement()
+    play_element = PlayElement()
     channel_elements = ChannelElements()
+
 
     def is_title_matches(self):
         """Verifies correct site is loaded"""
@@ -59,8 +64,25 @@ class MainPage(BasePage):
             ActionChains(self.driver).move_to_element(self.driver.find_element(*locator)).perform()
         self.click_element(locator)
         self._current_channel = channel
-        print(self.channels[self._current_channel]
-)
+        print(self.channels[self._current_channel])
+
+    def is_playing(self):
+        play_button = self.driver.find_element(By.CLASS_NAME, 'middle')
+        return not play_button.get_attribute('class').find('paused')
+
+
+    def current_track(self):
+        try:
+            if self.is_playing():
+                title = self.current_track_element.text
+                artist = self.current_artist_element.text
+                url = self.current_track_element.get_attribute("href")
+                return TrackRecord(title, artist, url, ctime())
+        except Exception as e:
+            print('there was an error: {}'.format(e))
+        return None
+        
+
     
     
     
@@ -68,6 +90,4 @@ class MainPage(BasePage):
         # access element setter by saving to a new variable
         track_name = self.current_track_element
 
-# track = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".current-track>h3>a")))
-# elem = driver.find_element(By.CSS_SELECTOR, ".current-track>h3>a")
 

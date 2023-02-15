@@ -7,8 +7,6 @@ from locators import *
 
 class BasePageElement(object):
     """Base page class that is initialized on every page object class."""
-    # def __init__(self, driver):
-    #       self.driver = driver
           
     def __set__(self, obj, value):
         """Sets the text to the value supplied, obj is the parent class where element instance is called i.e. MainPage"""
@@ -27,12 +25,6 @@ class BasePageElement(object):
             lambda driver: driver.find_elements(*self.locator))
         elements = driver.find_elements(*self.locator)
         return elements
-
-    # def click(self):
-    #     print('clicking element')
-    #     WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.locator))
-    #     button = self.driver.find_element(*self.locator)
-    #     self.driver.execute_script("arguments[0].click();", button)
     
     
 # ! Elements
@@ -42,10 +34,13 @@ class CurrentTrackElement(BasePageElement):
       locator = MainPageLocators.CURRENT_TRACK
       element = BasePageElement()
 
+class CurrentArtistElement(BasePageElement):
+      locator = MainPageLocators.CURRENT_ARTIST
+      element = BasePageElement()
+
 class ChannelButtonElement(BasePageElement):
       element = BasePageElement()
       locator = MainPageLocators.CHANNEL_BTN
-      
 
 class ChannelElements(BasePageElement):
       # element = BasePageElement()
@@ -56,4 +51,8 @@ class SelectedChannelElement(BasePageElement):
       def __init__(self, locator):
         self.locator = locator
         self.element = BasePageElement()
+
+class PlayElement(BasePageElement):
+      locator = MainPageLocators.PLAY
+      element = BasePageElement()
 

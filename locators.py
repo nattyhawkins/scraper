@@ -13,4 +13,7 @@ class MainPageLocators(object):
     # ! Track
     CURRENT_TRACK = (By.CSS_SELECTOR, ".current-track>h3>a")
     CURRENT_ARTIST = (By.CSS_SELECTOR, ".current-track>h2>a")
+    PREV = (By.CLASS_NAME, "first")
+    PLAY = (By.CLASS_NAME, "middle")
+    NEXT = (By.CLASS_NAME, "last")
 

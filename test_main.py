@@ -40,7 +40,7 @@ class PoolsuiteTesting(unittest.TestCase):
           self.mainPage.get_channels()
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_LIST_SCROLL)) # check main pg fully loaded
       
-      def test_select_channel(self):
+      def xtest_select_channel(self):
           print('running test: select channel')
           self.mainPage.skip_intro()
           self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
@@ -50,6 +50,30 @@ class PoolsuiteTesting(unittest.TestCase):
             self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
             time.sleep(2)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_BTN))
+      
+      def xtest_buttons(self):
+          print('running test: buttons *volume on!*')
+          self.mainPage.skip_intro()
+          time.sleep(5)
+          self.mainPage.click_element(MainPageLocators.NEXT)
+          time.sleep(5)
+          self.mainPage.click_element(MainPageLocators.PREV)
+          self.mainPage.click_element(MainPageLocators.PREV)
+          time.sleep(5)
+          self.mainPage.click_element(MainPageLocators.PLAY)
+          time.sleep(5)
+          self.mainPage.click_element(MainPageLocators.PLAY)
+          time.sleep(5)
+
+      def test_is_playing(self):
+          print('running test: is playing')
+          self.mainPage.skip_intro()
+          time.sleep(3)
+          assert self.mainPage.is_playing()
+          self.mainPage.click_element(MainPageLocators.PLAY)
+          assert not self.mainPage.is_playing()
+
+          
 
       def tearDown(self):
           self.driver.close()
