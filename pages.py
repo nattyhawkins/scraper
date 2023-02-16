@@ -6,7 +6,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from element import *
 from locators import *
 from track_record import TrackRecord
-from time import ctime
+from time import ctime, sleep
 
 # ! Pages
 class BasePage(object):
@@ -16,9 +16,10 @@ class BasePage(object):
 
 class MainPage(BasePage):
           
-    # Track list related state
+    # state
     _current_channel = 0
-    channels = { 0: 'default' }
+    channels = { 0: 'Poolsuite FM (Default)' }
+    _current_track_record = None
 
     # Elements
     current_track_element = CurrentTrackElement()
@@ -41,6 +42,8 @@ class MainPage(BasePage):
         assert self.is_title_matches()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".outer"))) #wait for loading animation
         self.press_space()
+        if not self.is_playing():
+            self.track_change(0)
 
     def click_element(self, locator):
         print('clicking element')
@@ -67,17 +70,38 @@ class MainPage(BasePage):
         print(self.channels[self._current_channel])
 
     def is_playing(self):
-        play_button = self.driver.find_element(By.CLASS_NAME, 'middle')
-        return not play_button.get_attribute('class').find('paused')
+        play_button = self.driver.find_element(*MainPageLocators.PLAYPAUSE)
+        return play_button.get_attribute('class').find('paused') < 1
+    
+    def track_change(self, action: int):
+        """perform track change and keep track of currently playing record"""
+        print(f'track change: {action}')
+        if action < 0:
+            # once to restart, twice for previous
+            for x in range(abs(action)):
+                self.click_element(MainPageLocators.PREV)
+        elif action == 0:
+            self.click_element(MainPageLocators.PLAYPAUSE)
+        elif action > 0:
+            for x in range(action):
+              self.click_element(MainPageLocators.NEXT)
+
+        if self.is_playing():
+            self._current_track_record = self.record_current_track()
+            print(self._current_track_record)
 
 
-    def current_track(self):
+
+    def record_current_track(self):
+        """if still playing after 5s, create record"""
+        sleep(5)
         try:
             if self.is_playing():
+                channel = self.channels[self._current_channel]
                 title = self.current_track_element.text
                 artist = self.current_artist_element.text
                 url = self.current_track_element.get_attribute("href")
-                return TrackRecord(title, artist, url, ctime())
+                return TrackRecord(channel, title, artist, url, ctime())
         except Exception as e:
             print('there was an error: {}'.format(e))
         return None

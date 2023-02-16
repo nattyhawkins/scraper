@@ -32,14 +32,11 @@ class BasePageElement(object):
 
 class CurrentTrackElement(BasePageElement):
       locator = MainPageLocators.CURRENT_TRACK
-      element = BasePageElement()
 
 class CurrentArtistElement(BasePageElement):
       locator = MainPageLocators.CURRENT_ARTIST
-      element = BasePageElement()
 
 class ChannelButtonElement(BasePageElement):
-      element = BasePageElement()
       locator = MainPageLocators.CHANNEL_BTN
 
 class ChannelElements(BasePageElement):
@@ -50,9 +47,7 @@ class SelectedChannelElement(BasePageElement):
       """locator must be passed depending on which channel is selected"""
       def __init__(self, locator):
         self.locator = locator
-        self.element = BasePageElement()
 
 class PlayElement(BasePageElement):
-      locator = MainPageLocators.PLAY
-      element = BasePageElement()
+      locator = MainPageLocators.PLAYPAUSE
 
