@@ -18,7 +18,7 @@ class BasePageElement(object):
         driver.find_element(*self.locator).send_keys(value)
 
     def __get__(self, obj, owner):
-        """Gets the text of the specified object"""
+        """Gets the text of the specified object. NOTE select first index if getting one element!"""
         print('__get__ element')
         driver = obj.driver
         WebDriverWait(driver, 100).until(

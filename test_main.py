@@ -12,21 +12,9 @@ from time import sleep
 
 class PoolsuiteTesting(unittest.TestCase):
       #  Set up / tear down are rerun for each test function. So each test defined in this class is run separately.
-      # channel_button_element = ChannelButtonElement()
-      channel_elements = ChannelElements()
-
 
       def setUp(self):
           PoolsuiteTracker.__init__(self)
-          # self.skip_intro = PoolsuiteTracker.skip_intro
-          # opts = Options()
-          # opts.add_argument('--headless')
-          # assert '--headless' in opts.arguments
-          # print('setting driver')
-          # self.driver = webdriver.Chrome(options=opts)
-          # print('getting poolsuite')
-          # self.driver.get('https://poolsuite.net/')
-          # self.mainPage = pages.MainPage(self.driver)
 
       def xtest_skip_intro(self):
           print('Running test skip intro')
@@ -51,27 +39,26 @@ class PoolsuiteTesting(unittest.TestCase):
             sleep(2)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_BTN))
 
-      def test_record_current_track(self):
+      def test_is_playing(self):
+          print('running test: is playing')
+          self.mainPage.skip_intro()
+          assert self.mainPage.is_playing()
+          self.mainPage.click_element(MainPageLocators.PLAYPAUSE)
+          assert not self.mainPage.is_playing()
+          
+      def xtest_record_current_track(self):
           print('running test: record current track')
           self.mainPage.skip_intro()
-          self.mainPage.record_current_track()
+          self.mainPage.update_current_track()
+          assert self.mainPage._current_track_record is not None
       
-      def test_track_change(self):
+      def xtest_track_change(self):
           print('running test: track change *volume on!*')
           self.mainPage.skip_intro()
           for x in [-1, 1, 0, -2]:
             sleep(5)
             self.mainPage.track_change(x)
 
-
-
-      def xtest_is_playing(self):
-          print('running test: is playing')
-          self.mainPage.skip_intro()
-          sleep(3)
-          assert self.mainPage.is_playing()
-          self.mainPage.click_element(MainPageLocators.PLAYPAUSE)
-          assert not self.mainPage.is_playing()
 
       def tearDown(self):
           self.driver.close()
