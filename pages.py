@@ -16,10 +16,7 @@ class BasePage(object):
 
 class MainPage(BasePage):
           
-    # state
-    _current_channel = 0
-    channels = { 0: 'Poolsuite FM (Default)' }
-    _current_track_record = None
+    
 
     # Elements
     current_track_element = CurrentTrackElement()
@@ -68,8 +65,9 @@ class MainPage(BasePage):
         self._current_channel = channel
         print(self.channels[self._current_channel])
 
-    def is_playing(self):
+    def check_is_playing(self):
         is_paused = self.play_element[0].get_attribute('class').find('paused')
+        self.is_playing = is_paused < 1
         return is_paused < 1
     
     def track_change(self, action: int):
@@ -89,7 +87,7 @@ class MainPage(BasePage):
 
     def update_current_track(self):
         print("updating current track")
-        if self.is_playing():
+        if self.check_is_playing():
             self._current_track_record = self.record_current_track()
             print(f"current record: {self._current_track_record}")
 
@@ -99,7 +97,7 @@ class MainPage(BasePage):
         sleep(5)
         print("creating record")
         try:
-            if self.is_playing():
+            if self.check_is_playing():
                 channel = self.channels[self._current_channel]
                 title = self.current_track_element[0].text
                 artist = self.current_artist_element[0].text
@@ -109,10 +107,6 @@ class MainPage(BasePage):
             print('there was an error: {}'.format(e))
         return None
         
-
-    
-    
-    
     def record_track(self):
         # access element setter by saving to a new variable
         track_name = self.current_track_element
