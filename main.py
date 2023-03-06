@@ -22,20 +22,18 @@ class PoolsuiteTracker():
           self.mainPage = pages.MainPage(self.driver)
           self.is_playing = True
 
-          # channel state
-          self._current_channel = 0
-          self.channels = { 0: 'Poolsuite FM (Default)' }
-          self.mainPage.get_channels()
+          # self.mainPage.skip_intro()
+          # self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
+          # self.mainPage.get_channels()
           
-
           # DB state
           self.database = []
-          self._current_track_record = None
+          
 
         # The database maintenance thread
-          self.thread = Thread(target=self._maintain)
-          self.thread.daemon = True    # Kills the thread when the main process dies
-          self.thread.start()
+          # self.thread = Thread(target=self._maintain())
+          # self.thread.daemon = True    # Kills the thread when the main process dies
+          # self.thread.start()
 
       def _maintain(self):
           while self.is_playing:

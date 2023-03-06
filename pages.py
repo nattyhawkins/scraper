@@ -15,8 +15,10 @@ class BasePage(object):
           self.driver = driver
 
 class MainPage(BasePage):
-          
-    
+    # channel state
+    _current_channel = 0
+    channels = { 0: 'Poolsuite FM (Default)' }
+    _current_track_record = None
 
     # Elements
     current_track_element = CurrentTrackElement()
@@ -89,7 +91,7 @@ class MainPage(BasePage):
         print("updating current track")
         if self.check_is_playing():
             self._current_track_record = self.record_current_track()
-            print(f"current record: {self._current_track_record}")
+            print(f"current record: {self._current_track_record} | end")
 
     def record_current_track(self):
         """if still playing after 5s, create record"""

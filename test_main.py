@@ -39,16 +39,17 @@ class PoolsuiteTesting(unittest.TestCase):
             sleep(2)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_BTN))
 
-      def test_check_is_playing(self):
+      def xtest_check_is_playing(self):
           print('running test: is playing')
           self.mainPage.skip_intro()
           assert self.mainPage.check_is_playing()
           self.mainPage.click_element(MainPageLocators.PLAYPAUSE)
           assert not self.mainPage.check_is_playing()
           
-      def xtest_record_current_track(self):
+      def test_record_current_track(self):
           print('running test: record current track')
           self.mainPage.skip_intro()
+          assert self.mainPage._current_track_record is None
           self.mainPage.update_current_track()
           assert self.mainPage._current_track_record is not None
       

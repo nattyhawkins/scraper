@@ -44,7 +44,7 @@ class ChannelElements(BasePageElement):
       locator = MainPageLocators.ALL_CHANNELS
         
 class SelectedChannelElement(BasePageElement):
-      """locator must be passed depending on which channel is selected"""
+      """locator must be passed referencing which channel is selected"""
       def __init__(self, locator):
         self.locator = locator
 
