@@ -10,7 +10,7 @@ from pages import *
 from locators import *
 from time import sleep
 
-class PoolsuiteTesting(unittest.TestCase):
+class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
       #  Set up / tear down are rerun for each test function. So each test defined in this class is run separately.
 
       def setUp(self):
@@ -18,11 +18,9 @@ class PoolsuiteTesting(unittest.TestCase):
 
       def xtest_skip_intro(self):
           print('Running test skip intro')
-          self.mainPage.skip_intro(self)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".logo"))) # check main pg fully loaded
       
       def xtest_get_channels(self):
-          self.mainPage.skip_intro()
           # self.mainPage.click_channels(self)
           self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
           self.mainPage.get_channels()
@@ -30,7 +28,6 @@ class PoolsuiteTesting(unittest.TestCase):
       
       def xtest_select_channel(self):
           print('running test: select channel')
-          self.mainPage.skip_intro()
           self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
           self.mainPage.get_channels()
           for x in range(3,7):
@@ -41,24 +38,30 @@ class PoolsuiteTesting(unittest.TestCase):
 
       def xtest_check_is_playing(self):
           print('running test: is playing')
-          self.mainPage.skip_intro()
           assert self.mainPage.check_is_playing()
           self.mainPage.click_element(MainPageLocators.PLAYPAUSE)
           assert not self.mainPage.check_is_playing()
           
-      def test_record_current_track(self):
+      def xtest_record_current_track(self):
           print('running test: record current track')
-          self.mainPage.skip_intro()
           assert self.mainPage._current_track_record is None
           self.mainPage.update_current_track()
           assert self.mainPage._current_track_record is not None
       
       def xtest_track_change(self):
           print('running test: track change *volume on!*')
-          self.mainPage.skip_intro()
           for x in [-1, 1, 0, -2]:
             sleep(5)
             self.mainPage.track_change(x)
+
+      def test_maintain_db(self):
+          print('running test: maintain db')
+          assert len(self.database) == 0
+          sleep(30)
+          assert len(self.database) == 1
+          self.mainPage.track_change(1)
+          sleep(30)
+          assert len(self.database) == 2
 
 
       def tearDown(self):

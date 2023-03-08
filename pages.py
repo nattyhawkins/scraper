@@ -81,6 +81,7 @@ class MainPage(BasePage):
                 self.click_element(MainPageLocators.PREV)
         elif action == 0:
             self.click_element(MainPageLocators.PLAYPAUSE)
+            self.is_playing = False
         elif action > 0:
             for x in range(action):
               self.click_element(MainPageLocators.NEXT)
@@ -90,12 +91,12 @@ class MainPage(BasePage):
     def update_current_track(self):
         print("updating current track")
         if self.check_is_playing():
-            self._current_track_record = self.record_current_track()
+            self._current_track_record = self.get_current_track_record()
             print(f"current record: {self._current_track_record} | end")
 
-    def record_current_track(self):
+    def get_current_track_record(self):
         """if still playing after 5s, create record"""
-        print("sleeping")
+        print("getting record: waiting 5s to confirm track listening...")
         sleep(5)
         print("creating record")
         try:
@@ -109,8 +110,6 @@ class MainPage(BasePage):
             print('there was an error: {}'.format(e))
         return None
         
-    def record_track(self):
-        # access element setter by saving to a new variable
-        track_name = self.current_track_element
+
 
 
