@@ -1,19 +1,19 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 import pages
+from track_record import TrackRecord
 from locators import *
 from element import *
 from threading import Thread
 from time import sleep
+from os.path import isfile
+import csv
 
 """This page details the main program chain of events, leveraging methods defined on other files"""
 
 class PoolsuiteTracker():    
 
-      def __init__(self):
+      def __init__(self, csvpath=None):
           opts = Options()
           opts.add_argument('--headless')
           assert '--headless' in opts.arguments
@@ -27,7 +27,15 @@ class PoolsuiteTracker():
           # self.mainPage.get_channels()
           
           # DB state
+          self.database_path=csvpath
           self.database = []
+
+          # Load db if possible
+          if isfile(self.database_path):
+            with open(self.database_path, newline='') as dbfile: # open and read the csv plain text file
+                dbreader = csv.reader(dbfile)
+                next(dbreader)   # skip header line
+                self.database = [TrackRecord._make(rec) for rec in dbreader]
           
 
           # The database maintenance thread
@@ -42,6 +50,13 @@ class PoolsuiteTracker():
                 self._update_db()
                 sleep(20)          # Check every 20 seconds
 
+      def save_db(self):
+          print('Saving db')
+          with open(self.database_path,'w',newline='') as dbfile:
+              dbwriter = csv.writer(dbfile)
+              dbwriter.writerow(list(TrackRecord._fields)) # write the 1st row of field names using named tuple base helper _fields
+              for entry in self.database:
+                  dbwriter.writerow(list(entry))
 
       def _update_db(self):
           try:
@@ -51,10 +66,11 @@ class PoolsuiteTracker():
                       and self.is_playing)
               if check:
                   self.database.append(self.mainPage._current_track_record)
+                  self.save_db()
 
           except Exception as e:
               print('error while updating the db: {}'.format(e))
- 
+
 
       def tearDown(self):
           self.driver.close()

@@ -1,20 +1,18 @@
-from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from main import PoolsuiteTracker
 import unittest
-from unittest.mock import Mock
 from pages import *
 from locators import *
 from time import sleep
+
 
 class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
       #  Set up / tear down are rerun for each test function. So each test defined in this class is run separately.
 
       def setUp(self):
-          PoolsuiteTracker.__init__(self)
+          PoolsuiteTracker.__init__(self, 'db/db.txt')
 
       def xtest_skip_intro(self):
           print('Running test skip intro')
@@ -56,13 +54,17 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
 
       def test_maintain_db(self):
           print('running test: maintain db')
-          assert len(self.database) == 0
+          start_len = len(self.database)
           sleep(30)
-          assert len(self.database) == 1
+          assert len(self.database) == start_len + 1
           self.mainPage.track_change(1)
           sleep(30)
-          assert len(self.database) == 2
+          assert len(self.database) == start_len + 2
 
+      # def test_save_db(self):
+      #     print('runnning test: save db')
+      #     sleep(30)
+      #     assert
 
       def tearDown(self):
           self.driver.close()
