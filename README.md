@@ -8,6 +8,14 @@ This project aims to allow the user to stream music, select a channel and skip s
 - Selenium
 - Unittest
 
+
+## Code Installation
+- Clone of download the repo
+- `pipenv` to install python packages
+- Add / remove x from test names then run file to run tests
+- Cannot yet run full programme
+
+
 ## Focus
 - Getting to grips with Selenium by following the docs
 - Following the page object design pattern
