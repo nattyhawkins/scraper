@@ -10,7 +10,6 @@ class BasePageElement(object):
           
     def __set__(self, obj, value):
         """Sets the text to the value supplied, obj is the parent class where element instance is called i.e. MainPage"""
-        print('__set__ element')
         driver = obj.driver
         WebDriverWait(driver, 100).until(
             lambda driver: driver.find_element(*self.locator))
@@ -19,7 +18,6 @@ class BasePageElement(object):
 
     def __get__(self, obj, owner):
         """Gets the text of the specified object. NOTE select first index if getting one element!"""
-        print('__get__ element')
         driver = obj.driver
         WebDriverWait(driver, 100).until(
             lambda driver: driver.find_elements(*self.locator))

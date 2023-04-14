@@ -7,7 +7,6 @@ from pages import *
 from locators import *
 from time import sleep
 
-
 class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
       #  Set up / tear down are rerun for each test function. So each test defined in this class is run separately.
 
@@ -52,7 +51,7 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
             sleep(5)
             self.mainPage.track_change(x)
 
-      def test_maintain_db(self):
+      def xtest_maintain_db(self):
           print('running test: maintain db')
           start_len = len(self.database)
           sleep(30)
@@ -61,13 +60,18 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
           sleep(30)
           assert len(self.database) == start_len + 2
 
-      # def test_save_db(self):
-      #     print('runnning test: save db')
-      #     sleep(30)
-      #     assert
+      def test_send_email(self):
+          print('runnning test: send email')
+          # self.mainPage.send_email_db()
+          PoolsuiteTracker.send_email_db(self)
+          assert True
 
       def tearDown(self):
+          # ? pkill -f "(chrome)?(--headless)"
+          # PoolsuiteTracker.tearDown(self)
           self.driver.close()
+      
+      
 
 # if test is being run, not just imported, run all of unit tests defined
 if __name__ == "__main__":

@@ -8,6 +8,8 @@ from threading import Thread
 from time import sleep
 from os.path import isfile
 import csv
+import smtplib
+from email.message import EmailMessage
 
 """This page details the main program chain of events, leveraging methods defined on other files"""
 
@@ -50,14 +52,6 @@ class PoolsuiteTracker():
                 self._update_db()
                 sleep(20)          # Check every 20 seconds
 
-      def save_db(self):
-          print('Saving db')
-          with open(self.database_path,'w',newline='') as dbfile:
-              dbwriter = csv.writer(dbfile)
-              dbwriter.writerow(list(TrackRecord._fields)) # write the 1st row of field names using named tuple base helper _fields
-              for entry in self.database:
-                  dbwriter.writerow(list(entry))
-
       def _update_db(self):
           try:
               check = (self.mainPage._current_track_record is not None
@@ -70,6 +64,28 @@ class PoolsuiteTracker():
 
           except Exception as e:
               print('error while updating the db: {}'.format(e))
+
+      def save_db(self):
+          print('Saving db')
+          with open(self.database_path,'w',newline='') as dbfile:
+              dbwriter = csv.writer(dbfile)
+              dbwriter.writerow(list(TrackRecord._fields)) # write the 1st row of field names using named tuple base helper _fields
+              for entry in self.database:
+                  dbwriter.writerow(list(entry))
+
+      def send_email_db(self):
+          print('sending email')
+          with open(self.database_path) as fp:
+              msg = EmailMessage()
+              msg.set_content(fp.read())
+
+          msg['Subject'] = f'Your latest Poolsuite session is here!'
+          msg['From'] = msg['To'] = 'ne.hawkins4@gmail.com'
+
+          # Set up own SMTP server
+          s = smtplib.SMTP('localhost')
+          s.send_message(msg)
+          s.quit()      
 
 
       def tearDown(self):

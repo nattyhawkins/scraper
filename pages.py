@@ -6,6 +6,8 @@ from element import *
 from locators import *
 from track_record import TrackRecord
 from time import ctime, sleep
+import smtplib
+from email.message import EmailMessage
 
 # ! Pages
 class BasePage(object):
@@ -108,6 +110,20 @@ class MainPage(BasePage):
         except Exception as e:
             print('there was an error: {}'.format(e))
         return None
+    
+    # def send_email_db(self):
+    #       print('sending email')
+    #       with open(self.database_path) as fp:
+    #           msg = EmailMessage()
+    #           msg.set_content(fp.read())
+
+    #       msg['Subject'] = f'Your latest Poolsuite session is here!'
+    #       msg['From'] = msg['To'] = 'ne.hawkins4@gmail.com'
+
+    #       # Set up own SMTP server
+    #       s = smtplib.SMTP('localhost')
+    #       s.send_message(msg)
+    #       s.quit()      
         
 
 
