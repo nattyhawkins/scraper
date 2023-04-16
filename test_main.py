@@ -68,7 +68,6 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
 
       def tearDown(self):
           # ? pkill -f "(chrome)?(--headless)"
-          # PoolsuiteTracker.tearDown(self)
           self.driver.close()
       
       

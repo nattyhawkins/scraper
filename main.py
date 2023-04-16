@@ -8,8 +8,13 @@ from threading import Thread
 from time import sleep
 from os.path import isfile
 import csv
-import smtplib
-from email.message import EmailMessage
+import pandas as pd
+
+import sendgrid
+import os
+from sendgrid.helpers.mail import Mail, To, Content, Email
+
+
 
 """This page details the main program chain of events, leveraging methods defined on other files"""
 
@@ -75,17 +80,24 @@ class PoolsuiteTracker():
 
       def send_email_db(self):
           print('sending email')
+          email = pd.read_csv(self.database_path)
+
           with open(self.database_path) as fp:
-              msg = EmailMessage()
-              msg.set_content(fp.read())
+            message = Mail(
+              from_email='nhk.development@gmail.com',
+              to_emails='nhk.development@gmail.com',
+              subject='Your latest Poolsuite session is here!',
+              html_content=email.to_html()
+            )
 
-          msg['Subject'] = f'Your latest Poolsuite session is here!'
-          msg['From'] = msg['To'] = 'ne.hawkins4@gmail.com'
-
-          # Set up own SMTP server
-          s = smtplib.SMTP('localhost')
-          s.send_message(msg)
-          s.quit()      
+          try:
+            sg = sendgrid.SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+            response = sg.send(message)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+          except Exception as e:
+            print(e.message)    
 
 
       def tearDown(self):
