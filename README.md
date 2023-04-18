@@ -22,6 +22,7 @@ This project aims to allow the user to stream music, select a channel and skip s
 - Implementing unit tests along side new functionality
 - Learning about concurrency and incorporating a daemon thread to maintain the "database" in the background
 - Parsing CSV files to save track history
+- Send track history to email using SendGrid API at end of session
 - Meaningful git commits
 
 

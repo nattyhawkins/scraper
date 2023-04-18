@@ -19,13 +19,12 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
       
       def xtest_get_channels(self):
           # self.mainPage.click_channels(self)
-          self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
+          # self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
           self.mainPage.get_channels()
-          assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_LIST_SCROLL)) # check main pg fully loaded
+          assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.PLAYPAUSE)) # check main pg fully loaded
       
       def xtest_select_channel(self):
           print('running test: select channel')
-          self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
           self.mainPage.get_channels()
           for x in range(3,7):
             self.mainPage.select_channel(x)
@@ -60,16 +59,20 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
           sleep(30)
           assert len(self.database) == start_len + 2
 
-      def test_send_email(self):
+      def xtest_send_email(self):
           print('runnning test: send email')
           # self.mainPage.send_email_db()
           PoolsuiteTracker.send_email_db(self)
           assert True
+      
+      def test_navigator(self):
+          self.mainPage.start()
+          assert True
 
       def tearDown(self):
           # ? pkill -f "(chrome)?(--headless)"
+          PoolsuiteTracker.send_email_db(self)
           self.driver.close()
-      
       
 
 # if test is being run, not just imported, run all of unit tests defined

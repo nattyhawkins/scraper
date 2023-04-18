@@ -6,8 +6,7 @@ from element import *
 from locators import *
 from track_record import TrackRecord
 from time import ctime, sleep
-import smtplib
-from email.message import EmailMessage
+import os
 
 # ! Pages
 class BasePage(object):
@@ -16,7 +15,7 @@ class BasePage(object):
           self.driver = driver
 
 class MainPage(BasePage):
-    # channel state
+    # Channel State
     _current_channel = 0
     channels = { 0: 'Poolsuite FM (Default)' }
     _current_track_record = None
@@ -26,47 +25,45 @@ class MainPage(BasePage):
     current_artist_element = CurrentArtistElement()
     play_element = PlayElement()
     channel_elements = ChannelElements()
-
-
+    
+    
+    # Methods
     def is_title_matches(self):
         """Verifies correct site is loaded"""
         return "Poolsuite" in self.driver.title
     
     def press_space(self):
-        """space to skip welcome animation"""
         ActionChains(self.driver).key_down(Keys.SPACE).key_up(Keys.SPACE).perform()
 
     def skip_intro(self):
-        print('skipping intro')
-        # mainPage = pages.MainPage(self.driver)
         assert self.is_title_matches()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".outer"))) #wait for loading animation
         self.press_space()
         sleep(2)
 
     def click_element(self, locator):
-        print('clicking element')
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
         button = self.driver.find_element(*locator)
         self.driver.execute_script("arguments[0].click();", button)
 
     def get_channels(self):
-        print('getting channels - page')
+        self.click_element(MainPageLocators.CHANNEL_BTN)
         channels = self.channel_elements
         print('\nChannels:')
         for (i, channel) in enumerate(channels):
             print(f'{i}. {channel.text}')
             self.channels[i] = channel.text
+        self.click_element(MainPageLocators.CHANNEL_BTN)
       
     def select_channel(self, channel={lambda _current_channel: _current_channel + 1 % 7}):
-        print(f'selecting channel {channel}')
+        # print(f'selecting channel {channel}')
+        self.click_element(MainPageLocators.CHANNEL_BTN)
         locator = (By.CSS_SELECTOR, f".select-options-scroll li:nth-of-type({channel + 1})")
         if (channel > 3):
-            print('scroll down')
             ActionChains(self.driver).move_to_element(self.driver.find_element(*locator)).perform()
         self.click_element(locator)
         self._current_channel = channel
-        print(self.channels[self._current_channel])
+        print(f"Now playing from: {self.channels[self._current_channel]}")
 
     def check_is_playing(self):
         is_paused = self.play_element[0].get_attribute('class').find('paused')
@@ -75,7 +72,7 @@ class MainPage(BasePage):
     
     def track_change(self, action: int):
         """perform track change and keep track of currently playing record"""
-        print(f'track change: {action}')
+        # print(f'track change: {action}')
         if action < 0:
             # once to restart, twice for previous
             for x in range(abs(action)):
@@ -90,16 +87,13 @@ class MainPage(BasePage):
         self.update_current_track()
 
     def update_current_track(self):
-        print("updating current track")
         if self.check_is_playing():
             self._current_track_record = self.get_current_track_record()
-            print(f"current record: {self._current_track_record} | end")
+            # print(f"current record: {self._current_track_record} | end")
 
     def get_current_track_record(self):
         """if still playing after 5s, create record"""
-        print("getting record: waiting 5s to confirm track listening...")
         sleep(5)
-        print("creating record")
         try:
             if self.check_is_playing():
                 channel = self.channels[self._current_channel]
@@ -111,20 +105,50 @@ class MainPage(BasePage):
             print('there was an error: {}'.format(e))
         return None
     
-    # def send_email_db(self):
-    #       print('sending email')
-    #       with open(self.database_path) as fp:
-    #           msg = EmailMessage()
-    #           msg.set_content(fp.read())
-
-    #       msg['Subject'] = f'Your latest Poolsuite session is here!'
-    #       msg['From'] = msg['To'] = 'ne.hawkins4@gmail.com'
-
-    #       # Set up own SMTP server
-    #       s = smtplib.SMTP('localhost')
-    #       s.send_message(msg)
-    #       s.quit()      
+    def welcome(self):
+        print('Welcome to this Poolsuite music scraper! Your listening history will be recorded and emailed to you. Note: this project is just for fun and not affiliated with Poolsuite.')
+        self._user_address = input("What is your email address? You can skip this to listen anyway: ")
+        print(f"Thanks! We will try sending your track history to: '{self._user_address}' ")
         
+
+    def menu(self):
+        print("""
+          Controls:
+            -2: Back
+            -1: Restart
+            0: Play/Pause
+            1: Next
+
+          Change channel:
+            Select channel e.g. "C3" or choose from below
+
+          Q: Quit
+        """)
+
+    def start(self):
+        self.welcome()   
+        self.get_channels()
+        self.menu()
+        self.nav()
+
+    def nav(self):
+        try:    
+          choice = input('Enter option: ').lower()
+          if choice == 'q':
+              return self.end_session()
+          elif choice.startswith('c') and int(choice[1]) in range(0, 7):
+              self.select_channel(int(choice[1]))
+          elif choice in ['-2', '-1', '0', '1']:
+              self.track_change(int(choice))
+          else: raise Exception('Oops! Invalid input')
+        except Exception as e:
+            print(e)
+        
+        self.nav()
+    
+    def end_session(self):
+        print('Bye! Your session history will be emailed to you if provided')
+
 
 
 

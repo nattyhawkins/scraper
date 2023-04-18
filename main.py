@@ -18,8 +18,9 @@ from sendgrid.helpers.mail import Mail, To, Content, Email
 
 """This page details the main program chain of events, leveraging methods defined on other files"""
 
-class PoolsuiteTracker():    
 
+
+class PoolsuiteTracker():    
       def __init__(self, csvpath=None):
           opts = Options()
           opts.add_argument('--headless')
@@ -30,8 +31,6 @@ class PoolsuiteTracker():
           self.is_playing = True
 
           self.mainPage.skip_intro()
-          # self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
-          # self.mainPage.get_channels()
           
           # DB state
           self.database_path=csvpath
@@ -43,7 +42,6 @@ class PoolsuiteTracker():
                 dbreader = csv.reader(dbfile)
                 next(dbreader)   # skip header line
                 self.database = [TrackRecord._make(rec) for rec in dbreader]
-          
 
           # The database maintenance thread
           self.thread = Thread(target=self._maintain, daemon=True) # set daemon flag > background process killed when the main process dies
@@ -53,7 +51,6 @@ class PoolsuiteTracker():
           while self.is_playing:
               self.mainPage.update_current_track() #update current track attribute every 2 mins to account for changing songs
               for x in range(6):
-                print('Maintaining db')
                 self._update_db()
                 sleep(20)          # Check every 20 seconds
 
@@ -71,7 +68,6 @@ class PoolsuiteTracker():
               print('error while updating the db: {}'.format(e))
 
       def save_db(self):
-          print('Saving db')
           with open(self.database_path,'w',newline='') as dbfile:
               dbwriter = csv.writer(dbfile)
               dbwriter.writerow(list(TrackRecord._fields)) # write the 1st row of field names using named tuple base helper _fields
@@ -79,27 +75,35 @@ class PoolsuiteTracker():
                   dbwriter.writerow(list(entry))
 
       def send_email_db(self):
-          print('sending email')
-          email = pd.read_csv(self.database_path)
+          address = self.mainPage._user_address
+          if address == 'nhk':
+              address = 'nhk.development@gmail.com'
+          print(address)
+          if '@' in address and '.' in address:
+            email = pd.read_csv(self.database_path)
 
-          with open(self.database_path) as fp:
+            # with open(self.database_path) as fp:
             message = Mail(
               from_email='nhk.development@gmail.com',
-              to_emails='nhk.development@gmail.com',
+              to_emails=address,
               subject='Your latest Poolsuite session is here!',
               html_content=email.to_html()
             )
 
-          try:
-            sg = sendgrid.SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-            response = sg.send(message)
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)
-          except Exception as e:
-            print(e.message)    
+            try:
+              sg = sendgrid.SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+              response = sg.send(message)
+              print(response.status_code)
+              print(response.body)
+              print(response.headers)
+            except Exception as e:
+              print(e)    
 
 
       def tearDown(self):
+          # ? pkill -f "(chrome)?(--headless)"
+          self.send_email_db()
           self.driver.close()
+
+# run = PoolsuiteTracker('db/db.txt')
 
