@@ -33,56 +33,64 @@ class PoolsuiteTracker():
           self.mainPage.skip_intro()
           
           # DB state
-          self.database_path=csvpath
           self.database = []
+          self.database_path = csvpath
 
           # Load db if possible
-          if isfile(self.database_path):
-            with open(self.database_path, newline='') as dbfile: # open and read the csv plain text file
-                dbreader = csv.reader(dbfile)
-                next(dbreader)   # skip header line
-                self.database = [TrackRecord._make(rec) for rec in dbreader]
+          # if isfile(self.database_path):
+          #   with open(self.database_path, newline='') as dbfile: # open and read the csv plain text file
+          #       dbreader = csv.reader(dbfile)
+          #       next(dbreader)   # skip header line
+          #       self.database = [TrackRecord._make(rec) for rec in dbreader]
 
           # The database maintenance thread
           self.thread = Thread(target=self._maintain, daemon=True) # set daemon flag > background process killed when the main process dies
           self.thread.start()
 
       def _maintain(self):
+          print('miantaiin db')
           while self.is_playing:
-              self.mainPage.update_current_track() #update current track attribute every 2 mins to account for changing songs
+              self.mainPage.update_current_track() #update current track attribute every 2 mins to account for naturally changing songs
               for x in range(6):
                 self._update_db()
                 sleep(20)          # Check every 20 seconds
 
       def _update_db(self):
+          """ updates the database array attribute """
+          print('update db')
           try:
               check = (self.mainPage._current_track_record is not None
                       and (len(self.database) == 0
-                            or self.database[-1] != self.mainPage._current_track_record)
+                            or self.database[-1].title != self.mainPage._current_track_record.title)
                       and self.is_playing)
+              print('updating... ', check)
               if check:
                   self.database.append(self.mainPage._current_track_record)
                   self.save_db()
-
           except Exception as e:
               print('error while updating the db: {}'.format(e))
 
       def save_db(self):
+          """ saves db array to file """
+          print('save db')
           with open(self.database_path,'w',newline='') as dbfile:
               dbwriter = csv.writer(dbfile)
               dbwriter.writerow(list(TrackRecord._fields)) # write the 1st row of field names using named tuple base helper _fields
               for entry in self.database:
                   dbwriter.writerow(list(entry))
+          print('saveddd db')
 
       def send_email_db(self):
           address = self.mainPage._user_address
           if address == 'nhk':
               address = 'nhk.development@gmail.com'
-          print('--> :', address)
+
+          if address:
+            print('Your session history will be sent to -->', address)
+
           if '@' in address and '.' in address:
             email = pd.read_csv(self.database_path)
 
-            # with open(self.database_path) as fp:
             message = Mail(
               from_email='nhk.development@gmail.com',
               to_emails=address,

@@ -87,20 +87,21 @@ class MainPage(BasePage):
         self.update_current_track()
 
     def update_current_track(self):
-        if self.check_is_playing():
-            self._current_track_record = self.get_current_track_record()
+        # if self.check_is_playing():
+        self._current_track_record = self.get_current_track_record()
             # print(f"current record: {self._current_track_record} | end")
 
     def get_current_track_record(self):
         """if still playing after 5s, create record"""
-        sleep(5)
         try:
-            if self.check_is_playing():
-                channel = self.channels[self._current_channel]
-                title = self.current_track_element[0].text
-                artist = self.current_artist_element[0].text
-                url = self.current_track_element[0].get_attribute('href')
-                return TrackRecord(channel, title, artist, url, ctime())
+            channel = self.channels[self._current_channel]
+            title = self.current_track_element[0].text
+            artist = self.current_artist_element[0].text
+            url = self.current_track_element[0].get_attribute('href')
+            
+            record = TrackRecord(channel, title, artist, url, ctime())
+            print(record)
+            return record
         except Exception as e:
             print('there was an error: {}'.format(e))
         return None
@@ -147,7 +148,7 @@ class MainPage(BasePage):
         self.nav()
     
     def end_session(self):
-        print('Bye! Your session history will be emailed to you if provided')
+        print('Bye!')
 
 
 

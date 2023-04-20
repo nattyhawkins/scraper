@@ -1,42 +1,4 @@
 channel,title,artist,url,timestamp
-Poolsuite FM (Default),Blind (Frankie Knuckles Remix),Hercules & Love Affair,https://soundcloud.com/hercules-and-love-affair/blind-frankie-knuckles-remix,Fri Mar 10 11:55:27 2023
-Poolsuite FM (Default),Love Your Days,Cherokee,https://soundcloud.com/cherokee-official/love-your-days,Fri Mar 10 11:55:57 2023
-Poolsuite FM (Default),Enjoy Your Life - Oby Onyioha,Juvenilia,https://soundcloud.com/juvenilia/enjoy-your-life-oby-onyioha,Fri Mar 10 12:05:15 2023
-Poolsuite FM (Default),Libano - Girls,Horeazon | Records,https://soundcloud.com/horeazon/02-girls,Fri Mar 10 12:05:43 2023
-Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Fri Apr 14 11:39:56 2023
-Poolsuite FM (Default),Flávio La Barre & Kattch - Recalling,Stratford Ct.,https://soundcloud.com/stratfordct/flavio-la-barre-kattch-recalling,Fri Apr 14 11:40:23 2023
-Poolsuite FM (Default),Sylvia Striplin - Give me your love (A Young Pulse Rework),Young Pulse,https://soundcloud.com/youngpulse/thursdayrework006,Fri Apr 14 11:44:15 2023
-Poolsuite FM (Default),Arian - Your Love Makes Me A Winner,K€DL@FUNK,https://soundcloud.com/rico-kedlafunk/arian-your-love-makes-me-a,Fri Apr 14 11:47:22 2023
-Poolsuite FM (Default),Elado - Blame,Gare du Nord,https://soundcloud.com/garedunord07/elado-blame,Fri Apr 14 11:53:28 2023
-Poolsuite FM (Default),Saucy Lady - Passport To My Love,Razor-N-Tape,https://soundcloud.com/razor-n-tape/saucy-lady-passport-to-my-love,Fri Apr 14 11:55:01 2023
-Poolsuite FM (Default),Saucy Lady - Passport To My Love,Razor-N-Tape,https://soundcloud.com/razor-n-tape/saucy-lady-passport-to-my-love,Fri Apr 14 12:02:54 2023
-Poolsuite FM (Default),Sylvia Striplin - Give me your love (A Young Pulse Rework),Young Pulse,https://soundcloud.com/youngpulse/thursdayrework006,Tue Apr 18 16:47:30 2023
-Poolsuite FM (Default),Arian - Your Love Makes Me A Winner,K€DL@FUNK,https://soundcloud.com/rico-kedlafunk/arian-your-love-makes-me-a,Tue Apr 18 17:21:01 2023
-Poolsuite FM (Default),So Nice,Those Guys From Athens,https://soundcloud.com/thoseguysfromathens/tgfa-so-nice,Tue Apr 18 17:33:20 2023
-Poolsuite FM (Default),So Nice,Those Guys From Athens,https://soundcloud.com/thoseguysfromathens/tgfa-so-nice,Tue Apr 18 17:35:10 2023
-Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Tue Apr 18 17:39:23 2023
-Poolsuite FM (Default),Elado - Blame,Gare du Nord,https://soundcloud.com/garedunord07/elado-blame,Tue Apr 18 17:40:02 2023
-Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Tue Apr 18 17:41:02 2023
-Poolsuite FM (Default),Hunter - When I'm Dreamin',Club Coral,https://soundcloud.com/clubcoral/hunter-when-im-dreamin,Tue Apr 18 17:41:12 2023
-Poolsuite FM (Default),Touch Sensitive - Pizza Guy,future classic,https://soundcloud.com/futureclassic/touch-sensitive-pizza-guy-3,Tue Apr 18 17:41:36 2023
-Poolsuite FM (Default),Touch Sensitive - Pizza Guy,future classic,https://soundcloud.com/futureclassic/touch-sensitive-pizza-guy-3,Tue Apr 18 17:42:52 2023
-Poolsuite FM (Default),Intro,FIBRE,https://soundcloud.com/fibremusic/intro,Tue Apr 18 17:43:35 2023
-Poolsuite FM (Default),Miguel Campbell & Matt Hughes - Talking Box,outcrossrecords,https://soundcloud.com/outcrossrecords/miguel-campbell-matt-hughes-talking-box,Tue Apr 18 17:43:50 2023
-Poolsuite FM (Default),Miguel Campbell & Matt Hughes - Talking Box,outcrossrecords,https://soundcloud.com/outcrossrecords/miguel-campbell-matt-hughes-talking-box,Tue Apr 18 17:45:30 2023
-Poolsuite FM (Default),Miguel Campbell & Matt Hughes - Talking Box,outcrossrecords,https://soundcloud.com/outcrossrecords/miguel-campbell-matt-hughes-talking-box,Tue Apr 18 17:47:35 2023
-Poolsuite FM (Default),Saint Pepsi - Skylar Spence (ED. Remake),ED.,https://soundcloud.com/elektricdreams/saint-pepsi-skylar-spence-ed-remake,Tue Apr 18 17:48:10 2023
-Poolsuite FM (Default),Saint Pepsi - Skylar Spence (ED. Remake),ED.,https://soundcloud.com/elektricdreams/saint-pepsi-skylar-spence-ed-remake,Tue Apr 18 17:48:37 2023
-Poolsuite FM (Default),Saint Pepsi - Skylar Spence (ED. Remake),ED.,https://soundcloud.com/elektricdreams/saint-pepsi-skylar-spence-ed-remake,Tue Apr 18 17:49:40 2023
-Hangover Club,Tropical Meditation,Mark Redito,https://soundcloud.com/markredito/tropical-meditation,Tue Apr 18 18:00:12 2023
-Poolsuite FM (Default),Porter Robinson - Fresh Static Snow (Last Island Remix),Last Island 🏝️,https://soundcloud.com/lastisland/porter-robinson-fresh-static-snow-last-island-remixals-master3,Tue Apr 18 18:01:38 2023
-Poolsuite FM (Default),YUKSEK feat. BREABOT & IRFANE - THE ONLY REASON,Yuksek,https://soundcloud.com/yuksek/yuksek-feat-breakbot-irfane-the-only-reason,Tue Apr 18 18:02:05 2023
-Indie Summer,The Durutti Column - Sketch For Summer,user4019061,https://soundcloud.com/user4019061/the-durutti-column-sketch-for,Tue Apr 18 18:03:26 2023
-Hangover Club,En Rie - Kodikas,Raw Suppliers,https://soundcloud.com/rawsuppliers/kodikas,Tue Apr 18 18:06:19 2023
-Hangover Club,Strange Waves,Sleepy Boi,https://soundcloud.com/thesleepiestboi/strange-waves,Tue Apr 18 18:08:25 2023
-Poolsuite FM (Default),Sylvia Striplin - Give me your love (A Young Pulse Rework),Young Pulse,https://soundcloud.com/youngpulse/thursdayrework006,Tue Apr 18 18:09:04 2023
-Poolsuite FM (Default),menor que tres (leftover),lebigmac,https://soundcloud.com/le-big-mac/enamorarse-de-un-incendio-leftover,Tue Apr 18 18:18:19 2023
-Friday Nite Heat,Rainbow Team - Dreaming (Birdee remix),Birdee,https://soundcloud.com/birdee/rainbow-team-dreaming-birdee-remix,Tue Apr 18 18:19:01 2023
-Poolsuite FM (Default),Bonus Points - Never Enough,Sundae Sauuce,https://soundcloud.com/sundaesauuce/bonus-points-never-enough,Tue Apr 18 18:26:25 2023
-Latest 20 Tracks,PREMIERE : Cotonete Vs. Dimitri From Paris - Parribean Disco (Club Mix)[HEAVENLY SWEETNESS],Délicieuse Musique,https://soundcloud.com/delicieuse-musique/cotonete-vs-dimitri-from-paris-paribbean-disco-club-mix,Tue Apr 18 18:26:48 2023
-Latest 20 Tracks,Larry Heard - Crystal Fantasy,tyllmann,https://soundcloud.com/tillmanns/larry-heard-crystal-fantasy,Tue Apr 18 18:27:49 2023
-Poolsuite FM (Default),Sylvia Striplin - Give me your love (A Young Pulse Rework),Young Pulse,https://soundcloud.com/youngpulse/thursdayrework006,Tue Apr 18 18:31:18 2023
+Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Thu Apr 20 15:59:07 2023
+Poolsuite FM (Default),Candy,Josh Tobias,https://soundcloud.com/joshtobias/candy-josh-tobias,Thu Apr 20 15:59:27 2023
+Poolsuite FM (Default),Sunshine,Kruzader,https://soundcloud.com/kruzader/sunshine,Thu Apr 20 16:00:06 2023
