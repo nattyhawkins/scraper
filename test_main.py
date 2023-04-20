@@ -61,17 +61,16 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
 
       def xtest_send_email(self):
           print('runnning test: send email')
-          # self.mainPage.send_email_db()
           PoolsuiteTracker.send_email_db(self)
           assert True
       
       def test_navigator(self):
           self.mainPage.start()
+          PoolsuiteTracker.send_email_db(self)
           assert True
 
       def tearDown(self):
           # ? pkill -f "(chrome)?(--headless)"
-          PoolsuiteTracker.send_email_db(self)
           self.driver.close()
       
 

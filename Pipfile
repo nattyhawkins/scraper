@@ -8,6 +8,7 @@ selenium = "*"
 beautifulsoup4 = "*"
 pytest = "*"
 pandas = "*"
+sendgrid = "*"
 
 [dev-packages]
 

@@ -78,7 +78,7 @@ class PoolsuiteTracker():
           address = self.mainPage._user_address
           if address == 'nhk':
               address = 'nhk.development@gmail.com'
-          print(address)
+          print('--> :', address)
           if '@' in address and '.' in address:
             email = pd.read_csv(self.database_path)
 
@@ -93,9 +93,9 @@ class PoolsuiteTracker():
             try:
               sg = sendgrid.SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
               response = sg.send(message)
-              print(response.status_code)
-              print(response.body)
-              print(response.headers)
+              # print(response.status_code)
+              # print(response.body)
+              # print(response.headers)
             except Exception as e:
               print(e)    
 

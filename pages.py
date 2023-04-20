@@ -120,7 +120,7 @@ class MainPage(BasePage):
             1: Next
 
           Change channel:
-            Select channel e.g. "C3" or choose from below
+            Select channel from above e.g. "C3"
 
           Q: Quit
         """)
