@@ -12,8 +12,7 @@ import pandas as pd
 
 import sendgrid
 import os
-from sendgrid.helpers.mail import Mail, To, Content, Email
-
+from sendgrid.helpers.mail import Mail
 
 
 """This page details the main program chain of events, leveraging methods defined on other files"""
@@ -28,10 +27,9 @@ class PoolsuiteTracker():
           self.driver = webdriver.Chrome(options=opts)
           self.driver.get('https://poolsuite.net/')
           self.mainPage = pages.MainPage(self.driver)
-          self.is_playing = True
 
-          self.mainPage.skip_intro()
-          
+          # self.mainPage.skip_intro()
+
           # DB state
           self.database = []
           self.database_path = csvpath
@@ -47,9 +45,11 @@ class PoolsuiteTracker():
           self.thread = Thread(target=self._maintain, daemon=True) # set daemon flag > background process killed when the main process dies
           self.thread.start()
 
+          self.start()
+
       def _maintain(self):
           print('miantaiin db')
-          while self.is_playing:
+          while self.mainPage._is_playing:
               self.mainPage.update_current_track() #update current track attribute every 2 mins to account for naturally changing songs
               for x in range(6):
                 self._update_db()
@@ -62,7 +62,7 @@ class PoolsuiteTracker():
               check = (self.mainPage._current_track_record is not None
                       and (len(self.database) == 0
                             or self.database[-1].title != self.mainPage._current_track_record.title)
-                      and self.is_playing)
+                      and self.mainPage._is_playing)
               print('updating... ', check)
               if check:
                   self.database.append(self.mainPage._current_track_record)
@@ -95,7 +95,8 @@ class PoolsuiteTracker():
               from_email='nhk.development@gmail.com',
               to_emails=address,
               subject='Your latest Poolsuite session is here!',
-              html_content=email.to_html()
+              html_content=email.to_html(),
+              plain_text_content="Something missing? The track history is updated every 20s, so if the listening duration was less than that it may have been missed."
             )
 
             try:
@@ -107,11 +108,33 @@ class PoolsuiteTracker():
             except Exception as e:
               print(e)    
 
+      def start(self):
+          self.mainPage.skip_intro()
+          self.mainPage.welcome()   
+          self.mainPage.get_channels()
+          self.mainPage.menu()
+          self.nav()
+
+      def nav(self):
+          try:    
+            choice = input('Enter option: ').lower()
+            if choice == 'q':
+                return self.tearDown()
+            elif choice.startswith('c') and int(choice[1]) in range(0, 7):
+                self.mainPage.select_channel(int(choice[1]))
+            elif choice in ['-2', '-1', '0', '1']:
+                self.mainPage.track_change(int(choice))
+            else: raise Exception('Oops! Invalid input')
+          except Exception as e:
+              print(e)
+          
+          self.nav()
 
       def tearDown(self):
-          # ? pkill -f "(chrome)?(--headless)"
+          # ? pkill -f "(chrome)?(--headless)" // Run in CLI to terminate any rogue headless browser instances
+          print('Bye!')
           self.send_email_db()
           self.driver.close()
 
-# run = PoolsuiteTracker('db/db.txt')
+run = PoolsuiteTracker('db/db.txt')
 

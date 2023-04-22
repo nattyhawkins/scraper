@@ -26,6 +26,7 @@ class MainPage(BasePage):
     play_element = PlayElement()
     channel_elements = ChannelElements()
     
+    _is_playing = True
     
     # Methods
     def is_title_matches(self):
@@ -39,7 +40,9 @@ class MainPage(BasePage):
         assert self.is_title_matches()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".outer"))) #wait for loading animation
         self.press_space()
-        sleep(2)
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(MainPageLocators.CURRENT_TRACK)) # wait for 2nd animation
+        if not self.check_is_playing():
+            self.play_pause()
 
     def click_element(self, locator):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
@@ -67,9 +70,13 @@ class MainPage(BasePage):
 
     def check_is_playing(self):
         is_paused = self.play_element[0].get_attribute('class').find('paused')
-        self.is_playing = is_paused < 1
+        self._is_playing = is_paused < 1
         return is_paused < 1
-    
+   
+    def play_pause(self):
+        self.click_element(MainPageLocators.PLAYPAUSE)
+        self._is_playing = False
+
     def track_change(self, action: int):
         """perform track change and keep track of currently playing record"""
         # print(f'track change: {action}')
@@ -78,8 +85,7 @@ class MainPage(BasePage):
             for x in range(abs(action)):
                 self.click_element(MainPageLocators.PREV)
         elif action == 0:
-            self.click_element(MainPageLocators.PLAYPAUSE)
-            self.is_playing = False
+            self.play_pause()
         elif action > 0:
             for x in range(action):
               self.click_element(MainPageLocators.NEXT)
@@ -110,7 +116,6 @@ class MainPage(BasePage):
         print('Welcome to this Poolsuite music scraper! Your listening history will be recorded and emailed to you. Note: this project is just for fun and not affiliated with Poolsuite.')
         self._user_address = input("What is your email address? You can skip this to listen anyway: ")
         print(f"Thanks! We will try sending your track history to: '{self._user_address}' ")
-        
 
     def menu(self):
         print("""
@@ -126,29 +131,6 @@ class MainPage(BasePage):
           Q: Quit
         """)
 
-    def start(self):
-        self.welcome()   
-        self.get_channels()
-        self.menu()
-        self.nav()
-
-    def nav(self):
-        try:    
-          choice = input('Enter option: ').lower()
-          if choice == 'q':
-              return self.end_session()
-          elif choice.startswith('c') and int(choice[1]) in range(0, 7):
-              self.select_channel(int(choice[1]))
-          elif choice in ['-2', '-1', '0', '1']:
-              self.track_change(int(choice))
-          else: raise Exception('Oops! Invalid input')
-        except Exception as e:
-            print(e)
-        
-        self.nav()
-    
-    def end_session(self):
-        print('Bye!')
 
 
 

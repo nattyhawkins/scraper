@@ -65,10 +65,11 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
           assert True
       
       def test_navigator(self):
-          self.mainPage.start()
+          # self.mainPage.start()
           assert True
 
-      def tearDown(self):
+      def tearDown(self): 
+          """ Do not include if tearDown already called in nav() """
           # ? pkill -f "(chrome)?(--headless)"
           PoolsuiteTracker.send_email_db(self)
           self.driver.close()

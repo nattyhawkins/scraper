@@ -13,6 +13,7 @@ This project aims to allow the user to stream music, select a channel and skip s
 - Clone of download the repo
 - `pipenv` to install python packages
 - Can add / remove x from test names then run file to run tests. Full program not yet complete.
+- If something goes wrong and the headless browser does not terminate when the program end, Mac users run: `pkill -f "(chrome)?(--headless)"`
 
 
 ## Focus
