@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from element import *
 from locators import *
 from track_record import TrackRecord
-from time import ctime
+from time import ctime, sleep
 
 # ! Pages
 class BasePage(object):
@@ -41,8 +41,7 @@ class MainPage(BasePage):
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".outer"))) #wait for loading animation
         self.press_space()
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(MainPageLocators.CURRENT_TRACK)) # wait for 2nd animation
-        if not self.check_is_playing():
-            self.play_pause()
+        self.ensure_is_playing()
 
     def click_element(self, locator):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
@@ -67,15 +66,25 @@ class MainPage(BasePage):
         self.click_element(locator)
         self._current_channel = channel
         print(f"Now playing from: {self.channels[self._current_channel]}")
+        self.ensure_is_playing()
 
-    def check_is_playing(self):
+    def check_if_playing(self):
         is_paused = self.play_element[0].get_attribute('class').find('paused')
         self._is_playing = is_paused < 1
         return is_paused < 1
    
     def play_pause(self):
         self.click_element(MainPageLocators.PLAYPAUSE)
-        self._is_playing = not self._is_playing
+        self._is_playing = self.check_if_playing()
+
+    def ensure_is_playing(self): 
+        """ This fixes bug on website where the track does not play """
+        i = 0
+        sleep(1)
+        while not self.check_if_playing() and i < 10:
+            self.play_pause()
+            i += 1
+            sleep(1)
 
     def track_change(self, action: int):
         """perform track change and keep track of currently playing record"""
@@ -83,19 +92,19 @@ class MainPage(BasePage):
         if action < 0:
             # once to restart, twice for previous
             for x in range(abs(action)):
-                self.click_element(MainPageLocators.PREV)
+              self.click_element(MainPageLocators.PREV)
+            self.ensure_is_playing() 
         elif action == 0:
             self.play_pause()
         elif action > 0:
             for x in range(action):
               self.click_element(MainPageLocators.NEXT)
+            self.ensure_is_playing() 
         
         self.update_current_track()
 
     def update_current_track(self):
-        # if self.check_is_playing():
         self._current_track_record = self.get_current_track_record()
-            # print(f"current record: {self._current_track_record} | end")
 
     def get_current_track_record(self):
         """if still playing after 5s, create record"""

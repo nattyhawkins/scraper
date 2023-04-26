@@ -1,32 +1,34 @@
 # Poolsuite Track History
 This is a solo project I have been working on since completing the GA SEI course. It aims to allow the user to stream music, select a channel and skip songs programmatically, whilst keeping a record of the users track history.
 
-⚒️ Work in progress ⚒️ 
 
 ## Technologies (So far)
 - Python
 - Selenium
 - Unittest
+- Sendgrid email API
 
 
 ## Code Installation
-- Clone of download the repo
-- `pipenv` to install python packages
-- Run `source ./sendgrid.env`
-- Can add / remove x from test names then run file to run tests. Full program not yet complete.
-- If something goes wrong and the headless browser does not terminate when the program end, Mac users run: `pkill -f "(chrome)?(--headless)"`
+- Clone or download the repo
+- `pipenv install` to install dependencies
+- `source ./sendgrid.env`
+- NOTE: In event of unterminated headless browser, Mac users run: `pkill -f "(chrome)?(--headless)"`
 
 
 ## Instructions
-Interact with the music station via CLI controls:
--2  Back
--1  Restart
-0   Play/Pause
-1   Next
+Run `python program.py` to begin! \
+Interact with the music station via CLI controls: \
+-2 --> Back \
+-1 --> Restart \
+0 --> Play/Pause \
+1 --> Next \
+\
+CX --> Change to channel X, X in [0, 6] \
+    Channel names will be displayed \
+\
+To run unit tests: add / remove x from start of test names and run `python test_main.py`
 
-CX  Change to channel X, X in [0, 6]
-    Channel names will be displayed
-    i.e. C3 --> Channel 3
 
 ## Focus
 - Getting to grips with Selenium by following the docs
@@ -36,5 +38,3 @@ CX  Change to channel X, X in [0, 6]
 - Parsing CSV files to save track history
 - Send track history to email using SendGrid API at end of session
 - Meaningful git commits
-
-

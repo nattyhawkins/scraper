@@ -27,6 +27,11 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
           self.mainPage.get_channels()
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.PLAYPAUSE)) # check main pg fully loaded
       
+      def test_ensure_is_playing(self):
+          self.mainPage.get_channels()
+          self.mainPage.select_channel(3)
+          assert self.mainPage.check_if_playing()
+
       def xtest_select_channel(self):
           print('Running test: select channel')
           self.mainPage.get_channels()
@@ -35,11 +40,11 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
             sleep(2)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_BTN))
 
-      def xtest_check_is_playing(self):
+      def xtest_check_if_playing(self):
           print('Running test: is playing')
-          assert self.mainPage.check_is_playing()
+          assert self.mainPage.check_if_playing()
           self.mainPage.click_element(MainPageLocators.PLAYPAUSE)
-          assert not self.mainPage.check_is_playing()
+          assert not self.mainPage.check_if_playing()
           
       def xtest_record_current_track(self):
           print('Running test: record current track')
@@ -62,7 +67,8 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
           sleep(25)
           assert len(self.database) == start_len + 2
 
-      def test_send_email(self):
+      def xtest_send_email(self):
+          """ Sends email to default developer email """
           print('runnning test: send email')
           response = self.send_email_db()
           assert response.status_code == 202

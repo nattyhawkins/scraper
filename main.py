@@ -27,15 +27,6 @@ class PoolsuiteTracker():
           self.database = []
           self.database_path = csvpath
 
-      def start(self):
-          self.mainPage.skip_intro()
-          self.start_db()
-          self.mainPage.welcome()   
-          self.mainPage.get_channels()
-          self.mainPage.menu()
-          self.nav()
-          self.tearDown()
-
       def start_db(self):
           # Load db if possible
           if isfile(self.database_path):
@@ -75,6 +66,15 @@ class PoolsuiteTracker():
               dbwriter.writerow(list(TrackRecord._fields)) # write the 1st row of field names using named tuple base helper _fields
               for entry in self.database:
                   dbwriter.writerow(list(entry))
+
+      def start(self):
+          self.mainPage.skip_intro()
+          self.start_db()
+          self.mainPage.welcome()   
+          self.mainPage.get_channels()
+          self.mainPage.menu()
+          self.nav()
+          self.tearDown()
 
       def send_email_db(self):
           address = self.mainPage._user_address
