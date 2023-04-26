@@ -5,8 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from element import *
 from locators import *
 from track_record import TrackRecord
-from time import ctime, sleep
-import os
+from time import ctime
 
 # ! Pages
 class BasePage(object):
@@ -27,6 +26,7 @@ class MainPage(BasePage):
     channel_elements = ChannelElements()
     
     _is_playing = True
+    _user_address = None
     
     # Methods
     def is_title_matches(self):
@@ -54,7 +54,7 @@ class MainPage(BasePage):
         channels = self.channel_elements
         print('\nChannels:')
         for (i, channel) in enumerate(channels):
-            print(f'{i}. {channel.text}')
+            print(f'  C{i}  {channel.text}')
             self.channels[i] = channel.text
         self.click_element(MainPageLocators.CHANNEL_BTN)
       
@@ -75,7 +75,7 @@ class MainPage(BasePage):
    
     def play_pause(self):
         self.click_element(MainPageLocators.PLAYPAUSE)
-        self._is_playing = False
+        self._is_playing = not self._is_playing
 
     def track_change(self, action: int):
         """perform track change and keep track of currently playing record"""
@@ -106,7 +106,7 @@ class MainPage(BasePage):
             url = self.current_track_element[0].get_attribute('href')
             
             record = TrackRecord(channel, title, artist, url, ctime())
-            print(record)
+            # print(record)
             return record
         except Exception as e:
             print('there was an error: {}'.format(e))
@@ -119,17 +119,14 @@ class MainPage(BasePage):
 
     def menu(self):
         print("""
-          Controls:
-            -2: Back
-            -1: Restart
-            0: Play/Pause
-            1: Next
+Controls:
+  -2  Back
+  -1  Restart
+  0   Play/Pause
+  1   Next
 
-          Change channel:
-            Select channel from above e.g. "C3"
-
-          Q: Quit
-        """)
+  Q: Quit
+""")
 
 
 

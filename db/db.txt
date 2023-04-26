@@ -1,2 +1,59 @@
 channel,title,artist,url,timestamp
-Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Sat Apr 22 15:15:15 2023
+Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Tue Apr 25 16:42:42 2023
+Poolsuite FM (Default),Sylvia Striplin - Give me your love (A Young Pulse Rework),Young Pulse,https://soundcloud.com/youngpulse/thursdayrework006,Tue Apr 25 16:44:00 2023
+Poolsuite FM (Default),Arian - Your Love Makes Me A Winner,K€DL@FUNK,https://soundcloud.com/rico-kedlafunk/arian-your-love-makes-me-a,Tue Apr 25 16:47:07 2023
+Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Tue Apr 25 16:57:41 2023
+Poolsuite FM (Default),Sylvia Striplin - Give me your love (A Young Pulse Rework),Young Pulse,https://soundcloud.com/youngpulse/thursdayrework006,Tue Apr 25 16:58:53 2023
+Poolsuite FM (Default),Pantéone - Airport Disco,Horeazon | Records,https://soundcloud.com/horeazon/panteone-airport-disco,Tue Apr 25 16:59:04 2023
+Poolsuite FM (Default),Arian - Your Love Makes Me A Winner,K€DL@FUNK,https://soundcloud.com/rico-kedlafunk/arian-your-love-makes-me-a,Tue Apr 25 17:02:04 2023
+Poolsuite FM (Default),Blind (Frankie Knuckles Remix),Hercules & Love Affair,https://soundcloud.com/hercules-and-love-affair/blind-frankie-knuckles-remix,Tue Apr 25 17:03:18 2023
+Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Tue Apr 25 17:04:48 2023
+Poolsuite FM (Default),Sticks & Stonez & Liv East - You're My,Glitterbox,https://soundcloud.com/glitterboxibiza/sticks-stonez-liv-east-youre-1,Wed Apr 26 10:04:50 2023
+Poolsuite FM (Default),Back Again-Kraak & Smaak feat John Turrell (Hot Toddy Remix),hot toddy,https://soundcloud.com/hottoddy-1/back-again-kraak-smaak-hot-toddy-remix,Wed Apr 26 10:05:21 2023
+Poolsuite FM (Default),Elado - Blame,Gare du Nord,https://soundcloud.com/garedunord07/elado-blame,Wed Apr 26 10:11:16 2023
+Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Wed Apr 26 10:11:23 2023
+Poolsuite FM (Default),Sticks & Stonez & Liv East - You're My,Glitterbox,https://soundcloud.com/glitterboxibiza/sticks-stonez-liv-east-youre-1,Wed Apr 26 10:12:54 2023
+Poolsuite FM (Default),Elado - Blame,Gare du Nord,https://soundcloud.com/garedunord07/elado-blame,Wed Apr 26 10:23:21 2023
+Poolsuite FM (Default),Arian - Your Love Makes Me A Winner,K€DL@FUNK,https://soundcloud.com/rico-kedlafunk/arian-your-love-makes-me-a,Wed Apr 26 10:29:53 2023
+Poolsuite FM (Default),Saucy Lady - Passport To My Love,Razor-N-Tape,https://soundcloud.com/razor-n-tape/saucy-lady-passport-to-my-love,Wed Apr 26 10:30:44 2023
+Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Wed Apr 26 10:35:10 2023
+Poolsuite FM (Default),Blind (Frankie Knuckles Remix),Hercules & Love Affair,https://soundcloud.com/hercules-and-love-affair/blind-frankie-knuckles-remix,Wed Apr 26 10:35:23 2023
+Poolsuite FM (Default),Arian - Your Love Makes Me A Winner,K€DL@FUNK,https://soundcloud.com/rico-kedlafunk/arian-your-love-makes-me-a,Wed Apr 26 10:39:16 2023
+Poolsuite FM (Default),Elado - Blame,Gare du Nord,https://soundcloud.com/garedunord07/elado-blame,Wed Apr 26 10:42:32 2023
+Poolsuite FM (Default),Lola Theme,HUNTER,https://soundcloud.com/huntersounds90/lola-theme,Wed Apr 26 10:42:50 2023
+Poolsuite FM (Default),Sticks & Stonez & Liv East - You're My,Glitterbox,https://soundcloud.com/glitterboxibiza/sticks-stonez-liv-east-youre-1,Wed Apr 26 10:52:58 2023
+Poolsuite FM (Default),Street Tacos,Bonus Points,https://soundcloud.com/bonuspoints/street-tacos,Wed Apr 26 10:53:08 2023
+Poolsuite FM (Default),Enjoy Your Life - Oby Onyioha,Juvenilia,https://soundcloud.com/juvenilia/enjoy-your-life-oby-onyioha,Wed Apr 26 10:58:01 2023
+Poolsuite FM (Default),Arian - Your Love Makes Me A Winner,K€DL@FUNK,https://soundcloud.com/rico-kedlafunk/arian-your-love-makes-me-a,Wed Apr 26 11:00:31 2023
+Poolsuite FM (Default),Enjoy Your Life - Oby Onyioha,Juvenilia,https://soundcloud.com/juvenilia/enjoy-your-life-oby-onyioha,Wed Apr 26 11:00:37 2023
+Poolsuite FM (Default),Blind (Frankie Knuckles Remix),Hercules & Love Affair,https://soundcloud.com/hercules-and-love-affair/blind-frankie-knuckles-remix,Wed Apr 26 11:01:20 2023
+Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Wed Apr 26 11:02:05 2023
+Poolsuite FM (Default),Arian - Your Love Makes Me A Winner,K€DL@FUNK,https://soundcloud.com/rico-kedlafunk/arian-your-love-makes-me-a,Wed Apr 26 11:02:11 2023
+Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Wed Apr 26 11:02:27 2023
+Poolsuite FM (Default),Saucy Lady - Passport To My Love,Razor-N-Tape,https://soundcloud.com/razor-n-tape/saucy-lady-passport-to-my-love,Wed Apr 26 11:19:13 2023
+Poolsuite FM (Default),RIVAGE - Juillet (feat. Julia Jean Baptiste),Roche Musique,https://soundcloud.com/rochemusique/2-juillet-feat-julia-jean,Wed Apr 26 11:19:44 2023
+Poolsuite FM (Default),ミツメ - トニック・ラブ（the oto factory Remix),the oto factory,https://soundcloud.com/the-oto-factory/mitsume-the-oto-factory-remix,Wed Apr 26 11:20:29 2023
+Poolsuite FM (Default),Mariya Takeuchi - 竹内 まりや Plastic Love,「𝒇𝒓𝒆𝒔𝒔𝒖𝒓𝒆 」,https://soundcloud.com/fresure/maria-takeuchi-plastic-love,Wed Apr 26 11:21:00 2023
+Poolsuite FM (Default),pink lemonade,engelwood,https://soundcloud.com/engelwoodmusic/pink-lemonade,Wed Apr 26 11:21:27 2023
+Poolsuite FM (Default),Dynamique - Special (Reprise),Dynamique,https://soundcloud.com/dynamiqueofficial/dynamique-special-reprise,Wed Apr 26 11:21:58 2023
+Poolsuite FM (Default),Satin Jackets - Out Of My Head [Earmilk Exclusive],Toolroom Records,https://soundcloud.com/toolroomrecords/satin-jackets-out-of-my-head-earmilk-exclusive,Wed Apr 26 11:24:53 2023
+Poolsuite FM (Default),Riviera - Raphael Futura,Raphael Futura ⛵️,https://soundcloud.com/raphaelfutura/riviera-raphael-futura-1,Wed Apr 26 11:25:23 2023
+Poolsuite FM (Default),Saucy Lady - Passport To My Love,Razor-N-Tape,https://soundcloud.com/razor-n-tape/saucy-lady-passport-to-my-love,Wed Apr 26 11:25:51 2023
+Poolsuite FM (Default),YUNG BAE - Pillow Talk (for Sydnee),NDYD Records,https://soundcloud.com/ndyd-records/pillow-talk-for-sydnee,Wed Apr 26 11:26:21 2023
+Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Wed Apr 26 14:10:23 2023
+Poolsuite FM (Default),Qualia (Original Mix),disco_bazz,https://soundcloud.com/disco_bazz/qualia-original-mix,Wed Apr 26 14:10:53 2023
+Poolsuite FM (Default),Arian - Your Love Makes Me A Winner,K€DL@FUNK,https://soundcloud.com/rico-kedlafunk/arian-your-love-makes-me-a,Wed Apr 26 14:11:20 2023
+Poolsuite FM (Default),'Tomorrow' - Ntombi Ndaba,AfroSynth,https://soundcloud.com/afrosynth/tomorrow-ntombi-ndaba,Wed Apr 26 14:11:28 2023
+Poolsuite FM (Default),Toni Braxton - Dance (Loshmi Edit) - Free Download,Tonbe (Loshmi),https://soundcloud.com/tonbe/toni-braxton-dance-loshmi-edit-free-download,Wed Apr 26 14:11:58 2023
+Poolsuite FM (Default),Blind (Frankie Knuckles Remix),Hercules & Love Affair,https://soundcloud.com/hercules-and-love-affair/blind-frankie-knuckles-remix,Wed Apr 26 14:15:45 2023
+Poolsuite FM (Default),Leinart - Sunset Rises [Secret Selection],Stratford Ct.,https://soundcloud.com/stratfordct/leinart-sunset-rises-secret-selection,Wed Apr 26 14:15:58 2023
+Poolsuite FM (Default),I want you Black-Dimitri From Paris super heavy funk brakes remix,Dimitri from Paris,https://soundcloud.com/dfp/i-want-you-back-dimitri-from-paris-super-heavy-funk-brakes-remix,Wed Apr 26 14:24:30 2023
+Friday Nite Heat,PREMIERE : Cotonete Vs. Dimitri From Paris - Parribean Disco (Club Mix)[HEAVENLY SWEETNESS],Délicieuse Musique,https://soundcloud.com/delicieuse-musique/cotonete-vs-dimitri-from-paris-paribbean-disco-club-mix,Wed Apr 26 14:26:30 2023
+Friday Nite Heat,Africa (K&F Edit),Osaka Groove Control,https://soundcloud.com/osakaincontrol/africa-kf-edit,Wed Apr 26 14:34:31 2023
+Poolsuite FM (Default),Blind (Frankie Knuckles Remix),Hercules & Love Affair,https://soundcloud.com/hercules-and-love-affair/blind-frankie-knuckles-remix,Wed Apr 26 14:35:28 2023
+Poolsuite FM (Default),Elado - Blame,Gare du Nord,https://soundcloud.com/garedunord07/elado-blame,Wed Apr 26 14:37:49 2023
+Poolsuite FM (Default),Enjoy Your Life - Oby Onyioha,Juvenilia,https://soundcloud.com/juvenilia/enjoy-your-life-oby-onyioha,Wed Apr 26 14:41:53 2023
+Poolsuite FM (Default),Elado - Blame,Gare du Nord,https://soundcloud.com/garedunord07/elado-blame,Wed Apr 26 14:42:38 2023
+Poolsuite FM (Default),Sticks & Stonez & Liv East - You're My,Glitterbox,https://soundcloud.com/glitterboxibiza/sticks-stonez-liv-east-youre-1,Wed Apr 26 14:45:05 2023
+Poolsuite FM (Default),Catch You Slippin,E. Live,https://soundcloud.com/elivebeats/fresh-moves,Wed Apr 26 14:47:05 2023
+Poolsuite FM (Default),Sticks & Stonez & Liv East - You're My,Glitterbox,https://soundcloud.com/glitterboxibiza/sticks-stonez-liv-east-youre-1,Wed Apr 26 14:48:42 2023

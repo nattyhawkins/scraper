@@ -2,6 +2,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from main import PoolsuiteTracker
+from selenium.webdriver.chrome.options import Options
 import unittest
 from pages import *
 from locators import *
@@ -12,66 +13,68 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
 
       def setUp(self):
           PoolsuiteTracker.__init__(self, 'db/db.txt')
-
+          self.mainPage.skip_intro()
+          self.start_db()
+                    
       def xtest_skip_intro(self):
-          print('Running test skip intro')
+          print('Running test: skip intro')
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".logo"))) # check main pg fully loaded
       
       def xtest_get_channels(self):
+          print('Running test: get channels')
           # self.mainPage.click_channels(self)
           # self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
           self.mainPage.get_channels()
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.PLAYPAUSE)) # check main pg fully loaded
       
       def xtest_select_channel(self):
-          print('running test: select channel')
+          print('Running test: select channel')
           self.mainPage.get_channels()
           for x in range(3,7):
             self.mainPage.select_channel(x)
-            self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
             sleep(2)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_BTN))
 
       def xtest_check_is_playing(self):
-          print('running test: is playing')
+          print('Running test: is playing')
           assert self.mainPage.check_is_playing()
           self.mainPage.click_element(MainPageLocators.PLAYPAUSE)
           assert not self.mainPage.check_is_playing()
           
       def xtest_record_current_track(self):
-          print('running test: record current track')
+          print('Running test: record current track')
           assert self.mainPage._current_track_record is None
           self.mainPage.update_current_track()
           assert self.mainPage._current_track_record is not None
       
       def xtest_track_change(self):
-          print('running test: track change *volume on!*')
+          print('Running test: track change *volume on!*')
           for x in [-1, 1, 0, -2]:
             sleep(5)
             self.mainPage.track_change(x)
 
       def xtest_maintain_db(self):
-          print('running test: maintain db')
+          print('Running test: maintain db')
           start_len = len(self.database)
-          sleep(30)
+          sleep(25)
           assert len(self.database) == start_len + 1
           self.mainPage.track_change(1)
-          sleep(30)
+          sleep(25)
           assert len(self.database) == start_len + 2
 
-      def xtest_send_email(self):
+      def test_send_email(self):
           print('runnning test: send email')
-          PoolsuiteTracker.send_email_db(self)
-          assert True
-      
-      def test_navigator(self):
-          # self.mainPage.start()
+          response = self.send_email_db()
+          assert response.status_code == 202
+
+      def xtest_program(self):
+          print('Running test: program')
+          self.start()
           assert True
 
       def tearDown(self): 
-          """ Do not include if tearDown already called in nav() """
-          # ? pkill -f "(chrome)?(--headless)"
-          PoolsuiteTracker.send_email_db(self)
+          # ? pkill -f "(chrome)?(--headless)" // Run in CLI to terminate any rogue headless browser instances
+          print('Bye!')
           self.driver.close()
       
 
