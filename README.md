@@ -1,5 +1,5 @@
 # Poolsuite Track History
-This project aims to allow the user to stream music, select a channel and skip songs programmatically, whilst keeping a record of the users track history. The radio will be controllable via CLI. 
+This is a solo project I have been working on since completing the GA SEI course. It aims to allow the user to stream music, select a channel and skip songs programmatically, whilst keeping a record of the users track history.
 
 ⚒️ Work in progress ⚒️ 
 
