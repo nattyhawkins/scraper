@@ -7,7 +7,7 @@ from locators import *
 
 class BasePageElement(object):
     """Base page class that is initialized on every page object class."""
-          
+
     def __set__(self, obj, value):
         """Sets the text to the value supplied, obj is the parent class where element instance is called i.e. MainPage"""
         driver = obj.driver
@@ -23,7 +23,6 @@ class BasePageElement(object):
             lambda driver: driver.find_elements(*self.locator))
         elements = driver.find_elements(*self.locator)
         return elements
-    
     
 # ! Elements
 """create element class by inheriting generic functionality from base"""
