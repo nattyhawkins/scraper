@@ -71,10 +71,6 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
           response = self.send_email_db()
           assert response.status_code == 202
 
-      def xtest_program(self):
-          print('Running test: program')
-          self.start()
-          assert True
 
       def tearDown(self): 
           # ? pkill -f "(chrome)?(--headless)" // Run in CLI to terminate any rogue headless browser instances

@@ -65,17 +65,6 @@ class PoolsuiteTracker():
               dbwriter = csv.writer(dbfile) 
               dbwriter.writerow(list(TrackRecord._fields))
               dbwriter.writerows(self.database)
-              # for entry in self.database:
-              #     dbwriter.writerows(list(entry))
-
-      def start(self):
-          self.mainPage.skip_intro()
-          self.start_db()
-          self.mainPage.welcome()   
-          self.mainPage.get_channels()
-          self.mainPage.menu()
-          self.nav()
-          self.tearDown()
 
       def send_email_db(self):
           address = self.mainPage._user_address
@@ -108,19 +97,29 @@ Your track history will be emailed to you if a valid address was provided.
               return response
             except Exception as e:
               print(e)    
+              
+      def start(self):
+          self.mainPage.skip_intro()
+          self.start_db()
+          self.mainPage.welcome()   
+          self.mainPage.get_channels()
+          self.mainPage.menu()
+          self.nav()
+          self.tearDown()
 
       def nav(self):
           try:    
             choice = input('Enter option: ').lower()
             if choice == 'q':
                 return self.send_email_db()
+            elif choice == 'c': self.mainPage.select_channel()
             elif choice.startswith('c') and int(choice[1]) in range(0, 7):
                 self.mainPage.select_channel(int(choice[1]))
             elif choice in ['-2', '-1', '0', '1']:
                 self.mainPage.track_change(int(choice))
             else: raise Exception('Oops! Invalid input')
           except Exception as e:
-              print(e)
+              print('Oops! Invalid input')
           
           self.nav()
 

@@ -37,8 +37,6 @@ sChannel names will be displayed \
 To run unit tests: add / remove x from start of test names and run `python test_main.py`
 
 
-ReadMe under construction.
-
 ## Build Process
 
 ### Planning, initial research, and set up
@@ -72,20 +70,34 @@ As an example, the test corresponding to this method calls the select_channel me
 
 I took this opportunity to do some research on concurrency, learning about pre-emptive vs cooperative multitasking (Threading and Asyncio) for input/output bound problems, in contrast to the truely parallel multiprocessing for CPU bound problems. 
 
-The benefit of using a daemon thread to maintain the database is that the program will preemptively switch over when it is optimal, during pauses in the main program, and terminate with the main program. 
+The benefit of using a daemon thread to maintain this database is that the program will pre-emptively switch over when it is optimal, during pauses in the main program, and terminate with the main program. 
 
 ![db maintenance](/images/startdb.png)
 
 ### CSV Parsing
-The start_db function loads the existing data from the csv file into memory, before beginning the maintenance thread. Here, the _current_track_record attribute is updated every 2 mins to account for naturally changing songs. The assumption is that all songs last at least 2 mins. Every 20 seconds, a named tuple record of the track is created and added to the database array attribute if it does not match the previously added record. Then, the updated database is saved to the csv, writing in each record.
+The start_db function loads the existing data from the csv file into memory, before beginning the maintenance thread. Here, the _current_track_record attribute is updated every 2 mins to account for naturally changing songs. The assumption is that all songs last at least 2 mins. Every 20s, a named tuple record of the track is created and added to the database array attribute if it does not match the previously added record. Then, the updated database is saved to the csv, writing in each record.
 
 ![save db](/images/savedb.png)
 
 ### Email API: Sendgrid
-After looking into different ways to send an email with Python, I decided to use an email API. Whilst this project did not necessarily need to improved security, analytics features or delivery rates over SMTP, it felt like the more robust and sustainable option. I just had to create a new gmail account for the project. Compared to some other APIs I looked into, SendGrid seemed to provide a decent service for free account holders as well as a simple implementation guide. The SendGrid API key is saved as an environment variable and the .env is git-ignored as standard.
+After looking into different ways to send an email with Python, I decided to use an email API. Whilst this project did not necessarily need to improved security, analytics features, or delivery rates over SMTP, it felt like the more robust and sustainable option. I just had to create a new gmail account for the project. Compared to some other APIs I looked into, SendGrid seemed to provide a decent service for free account holders as well as a simple implementation guide. The SendGrid API key is saved as an environment variable and the .env is git-ignored as standard.
 
-If no address is provided on initiation, then the program will send the email to the project email account. This made it more efficient for me to test as well as making a record if anyone decides to test the project. The track history is also displayed in the CL.
+If no address is provided on initiation, then the program will send the email to my project email account. This made it more efficient for me to test as well as taking a record if anyone decides to test the projectin the future. The track history is also displayed in the CL.
 
 ![send email](/images/sendemail.png)
 
 ### Command Line UI loop
+Whilst a fully interactive GUI would be nice, it wasn't really the focus of this project. So, I decided to use the command line to take input from the user.
+
+![navigator](/images/nav.png)
+
+Finally, to make the program feel cleaner, I isolated the commands that start the program in a new file.
+
+![start program](/images/program.png)
+
+
+### Future Improvements & Bugs
+- After the user enters a command, there is a slight delay before the option to enter a new command returns. During this time, the user may still enter a command, which may still be executed. This could be tightened up.
+- An improved database, perhaps that would allow the user to log in so that better track history information can be retreived.
+- The csv file is completely rewritten each time it is saved. This could be made quicker by adding new lines rather than rewriting the whole file.
+- The user is required to run `source ./sendgrid.env` before the program, each time the project is opened, otherwise the program cannot access the API key and the email will not be authorized.

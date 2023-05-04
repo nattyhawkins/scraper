@@ -87,7 +87,6 @@ class MainPage(BasePage):
 
     def track_change(self, action: int):
         """perform track change and keep track of currently playing record"""
-        # print(f'track change: {action}')
         if action < 0:
             # once to restart, twice for previous
             for x in range(abs(action)):
