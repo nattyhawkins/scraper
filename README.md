@@ -37,7 +37,7 @@ sChannel names will be displayed \
 To run unit tests: add / remove x from start of test names and run `python test_main.py`
 
 
-ReadMe under construction. Last updated 30/4.
+ReadMe under construction.
 
 ## Build Process
 
@@ -55,10 +55,18 @@ In Selenium, the web page elements are formed by inheriting base get/set functio
 ![element](/images/element.png)
 
 
-### TDD
-With the main elements now defined and easily accessable, I wrote the first unit test corresponding to a mainPage method that simply skips the intro animation played upon loading Poolsuite. This involved waiting for various elements to be visible, performing an ActionChain to press spacebar, and ensuring the music is playing thereafter.  
+### Methods and tests
+With the main elements now defined and easily accessable, I wrote the first unit test corresponding to a mainPage method that simply skips the intro animation played upon loading Poolsuite. This involved waiting for various elements to be visible, performing an ActionChain to press spacebar, and ensuring the music is playing thereafter.
 
-...
+click_element was another key method, taking a locator as a paramater. Due to the dynamic nature of the website, I realised that using Waits at the start of methods added a margin for delay, preventing errors where the target element had not yet become visible. The Wait is set to a max of 10s though will end when the subsequent until() method resolves. This makes the program more efficient than using a predetermined time.sleep call as it will wait for only the required length of time. 
+
+The idea behind select_channel is to accept an integer as argument corresponding to the desired channel, jumping to the subsequent channel by default if no argument is passed. This method works for looping the 7 channels, though could be improved by dynamically retreiving the number of channels as currently 7 is hardcoded. The locator is defined and if the target channel is above 3, an ActionChain performs a downward scroll to move the element into view before the click_element method is called. There was a bug on the website, where some songs would not play and the radio would remain paused. To fix this, I wrote the ensure_is_playing method which clicks the play button repeatedly until a playable track begins. 
+
+![methods](/images/methods.png)
+
+As an example, the test corresponding to this method calls the select_channel method on each channel, asserting that the correct channel is saved in memory followed by a 2s sleep for me to hear the channel playing. The final assertion confirms that the channel box has returned to its default state for future interactions.
+
+![tests1](/images/tests1.png)
 
 ### Concurrency
 

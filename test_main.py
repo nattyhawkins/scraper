@@ -9,7 +9,6 @@ from locators import *
 from time import sleep
 
 class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
-      #  Set up / tear down are rerun for each test function. So each test defined in this class is run separately.
 
       def setUp(self):
           PoolsuiteTracker.__init__(self, 'db/db.txt')
@@ -22,8 +21,6 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
       
       def xtest_get_channels(self):
           print('Running test: get channels')
-          # self.mainPage.click_channels(self)
-          # self.mainPage.click_element(MainPageLocators.CHANNEL_BTN)
           self.mainPage.get_channels()
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.PLAYPAUSE)) # check main pg fully loaded
       
@@ -32,11 +29,12 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
           self.mainPage.select_channel(3)
           assert self.mainPage.check_if_playing()
 
-      def xtest_select_channel(self):
+      def test_select_channel(self):
           print('Running test: select channel')
           self.mainPage.get_channels()
-          for x in range(3,7):
+          for x in range(0,7):
             self.mainPage.select_channel(x)
+            assert self.mainPage._current_channel == x
             sleep(2)
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.CHANNEL_BTN))
 
