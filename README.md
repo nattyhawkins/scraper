@@ -82,5 +82,10 @@ The start_db function loads the existing data from the csv file into memory, bef
 ![save db](/images/savedb.png)
 
 ### Email API: Sendgrid
+After looking into different ways to send an email with Python, I decided to use an email API. Whilst this project did not necessarily need to improved security, analytics features or delivery rates over SMTP, it felt like the more robust and sustainable option. I just had to create a new gmail account for the project. Compared to some other APIs I looked into, SendGrid seemed to provide a decent service for free account holders as well as a simple implementation guide. The SendGrid API key is saved as an environment variable and the .env is git-ignored as standard.
+
+If no address is provided on initiation, then the program will send the email to the project email account. This made it more efficient for me to test as well as making a record if anyone decides to test the project. The track history is also displayed in the CL.
+
+![send email](/images/sendemail.png)
 
 ### Command Line UI loop

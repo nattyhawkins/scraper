@@ -1,3 +1,0 @@
-channel,title,artist,url,timestamp
-Poolsuite FM (Default),Tatsuro Yamashita – Love Talkin' (Honey It's You),Brindépice ☀,https://soundcloud.com/brindepice/tatsuro-yamashita-love-talkin-honey-its-you,Thu May  4 14:33:37 2023
-Poolsuite FM (Default),End of Summer (feat. Goto),Cherokee,https://soundcloud.com/cherokee-official/end-of-summer,Thu May  4 14:34:03 2023

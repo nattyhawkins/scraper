@@ -65,6 +65,8 @@ class PoolsuiteTracker():
               dbwriter = csv.writer(dbfile) 
               dbwriter.writerow(list(TrackRecord._fields))
               dbwriter.writerows(self.database)
+              # for entry in self.database:
+              #     dbwriter.writerows(list(entry))
 
       def start(self):
           self.mainPage.skip_intro()
