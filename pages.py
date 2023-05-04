@@ -58,7 +58,6 @@ class MainPage(BasePage):
         self.click_element(MainPageLocators.CHANNEL_BTN)
       
     def select_channel(self, channel={lambda _current_channel: _current_channel + 1 % 7}):
-        # print(f'selecting channel {channel}')
         self.click_element(MainPageLocators.CHANNEL_BTN)
         locator = (By.CSS_SELECTOR, f".select-options-scroll li:nth-of-type({channel + 1})")
         if (channel > 3):

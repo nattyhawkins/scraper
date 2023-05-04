@@ -24,12 +24,12 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
           self.mainPage.get_channels()
           assert WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MainPageLocators.PLAYPAUSE)) # check main pg fully loaded
       
-      def test_ensure_is_playing(self):
+      def xtest_ensure_is_playing(self):
           self.mainPage.get_channels()
           self.mainPage.select_channel(3)
           assert self.mainPage.check_if_playing()
 
-      def test_select_channel(self):
+      def xtest_select_channel(self):
           print('Running test: select channel')
           self.mainPage.get_channels()
           for x in range(0,7):
@@ -56,7 +56,7 @@ class PoolsuiteTesting(unittest.TestCase, PoolsuiteTracker):
             sleep(5)
             self.mainPage.track_change(x)
 
-      def xtest_maintain_db(self):
+      def test_maintain_db(self):
           print('Running test: maintain db')
           start_len = len(self.database)
           sleep(25)

@@ -1,10 +1,10 @@
 # Poolsuite Track History
-This is a solo project I have been working on since completing the GA SEI course. It aims to allow the user to stream music from Poolsuite.net via a headless browser, controlling the music station programmatically, whilst keeping a record of the users track history which can then be shared via email. The key focus points were:
+This is a solo project I have been working on since completing the GA course. After It aims to allow the user to stream music from Poolsuite.net via a headless browser, controlling the music station programmatically, whilst keeping a record of the users track history which can then be shared via email. The key focus points were:
 
 - Getting to grips with Selenium by following the docs
 - Following the page object design pattern
 - Implementing unit tests along side new functionality
-- Learning about concurrency and incorporating a daemon thread to maintain the "database" in the background
+- Learning about concurrency and incorporating a daemon thread to maintain the database in the background
 - Parsing CSV files to save track history
 - Send track history to email using SendGrid API at end of session
 - Meaningful git commits
@@ -64,11 +64,22 @@ The idea behind select_channel is to accept an integer as argument corresponding
 
 ![methods](/images/methods.png)
 
-As an example, the test corresponding to this method calls the select_channel method on each channel, asserting that the correct channel is saved in memory followed by a 2s sleep for me to hear the channel playing. The final assertion confirms that the channel box has returned to its default state for future interactions.
+As an example, the test corresponding to this method calls the select_channel method on each channel, asserting that the correct channel is saved "in memory" followed by a 2s sleep for me to hear the channel playing. The final assertion confirms that the channel box has returned to its default state for future interactions.
 
 ![tests1](/images/tests1.png)
 
 ### Concurrency
+
+I took this opportunity to do some research on concurrency, learning about pre-emptive vs cooperative multitasking (Threading and Asyncio) for input/output bound problems, in contrast to the truely parallel multiprocessing for CPU bound problems. 
+
+The benefit of using a daemon thread to maintain the database is that the program will preemptively switch over when it is optimal, during pauses in the main program, and terminate with the main program. 
+
+![db maintenance](/images/startdb.png)
+
+### CSV Parsing
+The start_db function loads the existing data from the csv file into memory, before beginning the maintenance thread. Here, the _current_track_record attribute is updated every 2 mins to account for naturally changing songs. The assumption is that all songs last at least 2 mins. Every 20 seconds, a named tuple record of the track is created and added to the database array attribute if it does not match the previously added record. Then, the updated database is saved to the csv, writing in each record.
+
+![save db](/images/savedb.png)
 
 ### Email API: Sendgrid
 

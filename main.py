@@ -28,23 +28,23 @@ class PoolsuiteTracker():
           self.database_path = csvpath
 
       def start_db(self):
-          # Load db if possible
+          """ Load db if possible, start thread """
           if isfile(self.database_path):
-            with open(self.database_path, newline='') as dbfile: # open and read the csv plain text file
+            with open(self.database_path, newline='') as dbfile:
                 dbreader = csv.reader(dbfile)
-                next(dbreader)   # skip header line
+                next(dbreader) # skip header line
                 self.database = [TrackRecord._make(rec) for rec in dbreader]
 
-          # The database maintenance thread
-          self.thread = Thread(target=self._maintain, daemon=True) # set daemon flag > background process killed when the main process dies
+          self.thread = Thread(target=self._maintain, daemon=True)
           self.thread.start()
 
       def _maintain(self):
+          """ Update current track attribute every 2 mins to account for naturally changing songs. Update db every 20s """
           while self.mainPage._is_playing:
-              self.mainPage.update_current_track() #update current track attribute every 2 mins to account for naturally changing songs
+              self.mainPage.update_current_track() 
               for x in range(6):
                 self._update_db()
-                sleep(20)          # Check every 20 seconds
+                sleep(20)
 
       def _update_db(self):
           """ updates the database array attribute """
@@ -60,12 +60,11 @@ class PoolsuiteTracker():
               print('error while updating the db: {}'.format(e))
 
       def save_db(self):
-          """ saves db array to file """
+          """ Saves db array to file. Writes first row (field names) with named tuple base helper: _fields. """
           with open(self.database_path,'w',newline='') as dbfile:
-              dbwriter = csv.writer(dbfile)
-              dbwriter.writerow(list(TrackRecord._fields)) # write the 1st row of field names using named tuple base helper _fields
-              for entry in self.database:
-                  dbwriter.writerow(list(entry))
+              dbwriter = csv.writer(dbfile) 
+              dbwriter.writerow(list(TrackRecord._fields))
+              dbwriter.writerows(self.database)
 
       def start(self):
           self.mainPage.skip_intro()
